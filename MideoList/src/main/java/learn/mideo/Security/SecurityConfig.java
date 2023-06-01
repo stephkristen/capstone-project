@@ -23,6 +23,7 @@ public class SecurityConfig {
          http.csrf().disable();
          http.cors();
 
+         //TODO May need to change GET, POST, PUT, and DELETE paths later
          http.authorizeRequests()
                  .antMatchers("/authenticate").permitAll()
                  .antMatchers("/refresh_token").authenticated()
