@@ -22,7 +22,8 @@ import Search from "./components/Search";
 import Watchables from "./components/Watchables";
 import WatchableDetails from "./components/WatchableDetails";
 import WatchableTable from "./components/WatchableTable";
-// import './index.css';
+import './index.css';
+import './app.scss';
 
 function App() {
   const [user, setUser] = useState(null);

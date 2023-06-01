@@ -1,0 +1,20 @@
+/* import only the Bootstrap files needed for customizations */
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+/* Your customizations here */
+
+$white: #ffffff;
+
+$theme-colors: (
+    "light": #f1e3d6,
+    "dark": #090908,
+    "primary": #0b293e,
+    "secondary": #5a5d76,
+    // "info": #e86126,
+    "info": #66A0E3,
+    "success": #149754,
+    "warning": #e1c716,
+    "danger": #ee090c,
+);
+
+@import '~bootstrap/scss/bootstrap';

@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 function NavBar() {
 		return (
-		<nav className='navbar navbar-expand-lg bg-body-tertiary'>
+		<nav id='navbar' className='navbar navbar-expand-lg bg-body-tertiary fixed-top shadow p-2 mb-5 rounded navbar-dark'>
 			<div className='container-fluid'>
 				<NavLink className='navbar-brand' aria-current='page' to='/'>
 					Mideo
