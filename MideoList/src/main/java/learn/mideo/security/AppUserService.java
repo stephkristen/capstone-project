@@ -1,4 +1,4 @@
-package learn.mideo.Security;
+package learn.mideo.security;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

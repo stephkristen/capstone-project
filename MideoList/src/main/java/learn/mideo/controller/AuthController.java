@@ -1,6 +1,6 @@
-package learn.mideo.Controller;
+package learn.mideo.controller;
 
-import learn.mideo.Security.JwtConverter;
+import learn.mideo.security.JwtConverter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
