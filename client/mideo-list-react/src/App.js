@@ -14,10 +14,10 @@ import FormErrors from "./components/FormErrors";
 import NavBar from "./components/NavBar";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
-import Error from "./components/Errors";
+import Error from "./components/Error";
 import Login from "./components/Login";
 import Results from "./components/Results";
-import Signup from "./components/Signup";
+import SignUp from "./components/SignUp";
 import Search from "./components/Search";
 import Watchables from "./components/Watchables";
 import WatchableDetails from "./components/WatchableDetails";
@@ -47,7 +47,7 @@ function App() {
               <Route
                 path="/login"
                 element={!user ? <Login /> : <Navigate to="/" replace={true} />} />
-              <Route path="/signup" element={<Signup />} />
+              <Route path="/signup" element={<SignUp />} />
             </Routes>
           </main>
         </div>
