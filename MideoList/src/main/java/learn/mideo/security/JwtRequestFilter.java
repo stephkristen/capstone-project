@@ -1,7 +1,9 @@
 package learn.mideo.security;
 
+import learn.mideo.model.AppUser;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
@@ -28,13 +30,15 @@ public class JwtRequestFilter extends BasicAuthenticationFilter {
         String authorization = request.getHeader("Authorization");
         if (authorization != null && authorization.startsWith("Bearer ")) {
 
-            UserDetails user = converter.getUserFromToken(authorization);
+            AppUser user = converter.getUserFromToken(authorization);
             if (user == null) {
                 response.setStatus(403);
             } else {
 
                 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-                        user.getUsername(), null, user.getAuthorities());
+                        user, null, user.getAuthorities());
+
+                SecurityContextHolder.getContext().setAuthentication(token);
             }
         }
 
