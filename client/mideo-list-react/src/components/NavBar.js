@@ -1,7 +1,15 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink,useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import AuthContext from '../contexts/AuthContext';
 
 function NavBar() {
-		return (
+	const { user, logout } = useContext(AuthContext);
+	const navigate = useNavigate();
+	function handleLogout() {
+		logout();
+		navigate('/');
+	}
+	return (
 		<nav id='navbar' className='navbar navbar-expand-lg bg-body-tertiary fixed-top shadow p-2 mb-5 rounded navbar-dark'>
 			<div className='container-fluid'>
 				<NavLink className='navbar-brand' aria-current='page' to='/'>
@@ -24,21 +32,51 @@ function NavBar() {
 								Home
 							</NavLink>
 						</li>
-						<li className='nav-item'>
-							<NavLink className='nav-link' to='/signup' end>
-								Sign Up
-							</NavLink>
-						</li>
-						<li className='nav-item'>
-							<NavLink className='nav-link' to='/login'>
-								Log In
-							</NavLink>
-						</li>
+						{user && (
+							<>
+								<li className='nav-item'>
+									<NavLink className='nav-link' to='/watchlist'>
+										WatchLists
+									</NavLink>
+								</li>
+								<li className='nav-item'>
+									<NavLink className='nav-link' to='/search' end>
+										Search
+									</NavLink>
+								</li>
+							</>
+						)}
+						{!user && (
+							<>
+								<li className='nav-item'>
+									<NavLink className='nav-link' to='/signup'>
+										Sign Up
+									</NavLink>
+								</li>
+								<li className='nav-item'>
+									<NavLink className='nav-link' to='/login'>
+										Log In
+									</NavLink>
+								</li>
+							</>
+						)}
 					</ul>
+					{user && (
+						<>
+							<span className='navbar-text mx-2'>Hello, {user.sub}!</span>
+							<button className='btn btn-dark' onClick={handleLogout}>
+								Log Out
+							</button>
+						</>
+					)}
 				</div>
 			</div>
 		</nav>
 	);
+
+
+
 }
 
+	
 export default NavBar;

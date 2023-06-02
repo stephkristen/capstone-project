@@ -1,23 +1,23 @@
 /* import only the Bootstrap files needed for customizations */
-@import "node_modules/bootstrap/scss/functions";
-@import "node_modules/bootstrap/scss/variables";
+// @import '~bootstrap/scss/bootstrap';
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
 /* Your customizations here */
 
 $theme-colors: (
-    "light": #f1e3d6,
+    "light": #eeedef,
     "dark": #090908,
     // "primary": #0b293e,
     "primary": #66A0E3,
     "secondary": #5a5d76,
-    "info": #e86126,
+    "info": #fbac31,
     "success": #149754,
     "warning": #e1c716,
-    "danger": #ee090c,
+    "danger": #e92d32,
 );
 
+// @import "bootstrap";
 @import '~bootstrap/scss/bootstrap';
-@import 'node_modules/bootstrap/scss/bootstrap';
-
 body {
     background-color: #090908 !important;
 }
