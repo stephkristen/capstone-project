@@ -13,22 +13,22 @@ public class AppUser implements UserDetails {
 
     private ObjectId id;
     private final String username;
-    private final String password;
+    private final String passwordHash;
     private final boolean enabled;
     private final String role;
 
 
-    public AppUser(ObjectId id, String username, String password, boolean enabled, String role) {
+    public AppUser(ObjectId id, String username, String passwordHash, boolean enabled, String role) {
         this.id = id;
         this.username = username;
-        this.password = password;
+        this.passwordHash = passwordHash;
         this.enabled = enabled;
         this.role = role;
     }
 
-    public AppUser(String username, String password, boolean enabled, String role) {
+    public AppUser(String username, String passwordHash, boolean enabled, String role) {
         this.username = username;
-        this.password = password;
+        this.passwordHash = passwordHash;
         this.enabled = enabled;
         this.role = role;
     }
@@ -43,7 +43,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public String getPassword() {
-        return password;
+        return passwordHash;
     }
 
     @Override
