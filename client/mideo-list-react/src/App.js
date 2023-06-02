@@ -6,8 +6,9 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import { useState, useEffect } from 'react';
-import AuthContext from './contexts/AuthContext';
+import { useState, useEffect } from "react";
+import AuthContext from "./contexts/AuthContext";
+import "./index.css";
 
 import AddModal from "./components/AddModal";
 import FormErrors from "./components/FormErrors";
@@ -22,8 +23,12 @@ import Search from "./components/Search";
 import Watchables from "./components/Watchables";
 import WatchableDetails from "./components/WatchableDetails";
 import WatchableTable from "./components/WatchableTable";
+<<<<<<< HEAD
 import './index.css';
 import './App.scss';
+=======
+// import { refresh } from './services/auth';
+>>>>>>> origin/main
 
 function App() {
   const [user, setUser] = useState(null);
@@ -47,7 +52,12 @@ function App() {
               <Route path="/error" element={<Error></Error>}></Route>
               <Route
                 path="/login"
+<<<<<<< HEAD
                 element={!user ? <Login /> : <Navigate to="/" replace={true} />} />
+=======
+                element={!user ? <Login /> : <Navigate to="/" replace={true} />}
+              />
+>>>>>>> origin/main
               <Route path="/signup" element={<SignUp />} />
             </Routes>
           </main>
