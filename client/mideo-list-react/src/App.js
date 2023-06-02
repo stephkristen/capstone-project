@@ -23,7 +23,7 @@ import Watchables from "./components/Watchables";
 import WatchableDetails from "./components/WatchableDetails";
 import WatchableTable from "./components/WatchableTable";
 import './index.css';
-import './app.scss';
+import './App.scss';
 
 function App() {
   const [user, setUser] = useState(null);

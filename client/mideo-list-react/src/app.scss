@@ -3,18 +3,25 @@
 @import "node_modules/bootstrap/scss/variables";
 /* Your customizations here */
 
-$white: #ffffff;
-
 $theme-colors: (
     "light": #f1e3d6,
     "dark": #090908,
-    "primary": #0b293e,
+    // "primary": #0b293e,
+    "primary": #66A0E3,
     "secondary": #5a5d76,
-    // "info": #e86126,
-    "info": #66A0E3,
+    "info": #e86126,
     "success": #149754,
     "warning": #e1c716,
     "danger": #ee090c,
 );
 
 @import '~bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap/scss/bootstrap';
+
+body {
+    background-color: #090908 !important;
+}
+
+#navbar {
+    background-color: rgba(5, 2, 19, 0.5) !important;
+}
