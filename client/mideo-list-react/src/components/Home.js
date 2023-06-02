@@ -25,17 +25,17 @@ function Home() {
     return (
         <div>
             <div className='jumbotron jumbotron-fluid p-5 mt-5' style={{ background: `url(${background}) no-repeat center center fixed` }}>
-                <div class="container" style={{ color: 'white' }}>
-                    <div class="row h-100 align-items-center">
-                    <div class="col-12 text-center">
-                        <h1 class="display-4">Mideo</h1>
-                        <p class="lead">Keep track of your watching history and plan what you want to watch next.</p>
+                <div className="container" style={{ color: 'white' }}>
+                    <div className="row h-100 align-items-center">
+                    <div className="col-12 text-center">
+                        <h1 className="display-4">Mideo</h1>
+                        <p className="lead">Keep track of your watching history and plan what you want to watch next.</p>
                     </div>
                     </div>
                 </div>
             </div>
             <div>
-            {/* <button className='btn btn-primary'>Test</button> */}
+            {/* <button className='btn btn-info'>Test</button> */}
             <video>
 
             </video>
