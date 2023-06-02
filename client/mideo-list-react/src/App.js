@@ -23,6 +23,8 @@ import Search from "./components/Search";
 import Watchables from "./components/Watchables";
 import WatchableDetails from "./components/WatchableDetails";
 import WatchableTable from "./components/WatchableTable";
+import './index.css';
+import './App.scss';
 // import { refresh } from './services/auth';
 
 function App() {
@@ -47,8 +49,7 @@ function App() {
               <Route path="/error" element={<Error></Error>}></Route>
               <Route
                 path="/login"
-                element={!user ? <Login /> : <Navigate to="/" replace={true} />}
-              />
+                element={!user ? <Login /> : <Navigate to="/" replace={true} />} />
               <Route path="/signup" element={<SignUp />} />
             </Routes>
           </main>
