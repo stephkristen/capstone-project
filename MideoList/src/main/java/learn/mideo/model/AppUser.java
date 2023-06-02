@@ -1,45 +1,53 @@
 package learn.mideo.model;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
 
+
+@Document(collection="app_user")
 public class AppUser implements UserDetails {
 
-    private int appUserId;
+    private ObjectId id;
     private final String username;
-    private final String password;
+    private final String passwordHash;
     private final boolean enabled;
-    private final Collection<GrantedAuthority> authorities;
+    private final String role;
 
 
-    public AppUser(int appUserId, String username, String password, boolean enabled, List<String> roles) {
-        this.appUserId = appUserId;
+    @PersistenceConstructor
+    public AppUser(ObjectId id, String username, String passwordHash, boolean enabled, String role) {
+        this.id = id;
         this.username = username;
-        this.password = password;
+        this.passwordHash = passwordHash;
         this.enabled = enabled;
-        this.authorities = convertRolesToAuthorities(roles);
+        this.role = role;
     }
 
-    private static Collection<GrantedAuthority> convertRolesToAuthorities(List<String> roles) {
-        return roles.stream()
-                .map(r -> new SimpleGrantedAuthority(r))
-                .collect(Collectors.toList());
+    public AppUser(String username, String passwordHash, boolean enabled, String role) {
+        this.username = username;
+        this.passwordHash = passwordHash;
+        this.enabled = enabled;
+        this.role = role;
     }
 
     @Override
     public Collection<GrantedAuthority> getAuthorities() {
-        return new ArrayList<>(authorities);
+        GrantedAuthority authority = new SimpleGrantedAuthority(role);
+        ArrayList<GrantedAuthority> authorities = new ArrayList<>();
+        authorities.add(authority);
+        return authorities;
     }
 
     @Override
     public String getPassword() {
-        return password;
+        return passwordHash;
     }
 
     @Override
@@ -67,11 +75,15 @@ public class AppUser implements UserDetails {
         return enabled;
     }
 
-    public int getAppUserId() {
-        return appUserId;
+    public ObjectId getId() {
+        return id;
     }
 
-    public void setAppUserId(int appUserId) {
-        this.appUserId = appUserId;
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    public String getRole() {
+        return role;
     }
 }

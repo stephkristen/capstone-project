@@ -7,25 +7,30 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
 
     private final JwtConverter converter;
+    private final UserDetailsService userDetailsService;
 
-    public SecurityConfig(JwtConverter converter) {
+    public SecurityConfig(JwtConverter converter, UserDetailsService userDetailsService) {
         this.converter = converter;
+        this.userDetailsService = userDetailsService;
     }
 
     @Bean
      public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationConfiguration authConfig) throws Exception {
          http.csrf().disable();
+
          http.cors();
 
          //TODO May need to change GET, POST, PUT, and DELETE paths later
          http.authorizeRequests()
                  .antMatchers("/authenticate").permitAll()
+                 .antMatchers("/create_account").permitAll()
                  .antMatchers("/refresh_token").authenticated()
                  .antMatchers(HttpMethod.GET,
                          "/watchlist").hasAnyAuthority("USER", "ADMIN")
