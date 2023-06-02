@@ -3,6 +3,7 @@ package learn.mideo.security;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import learn.mideo.model.AppUser;
+import org.bson.types.ObjectId;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -38,7 +39,7 @@ public class JwtConverter {
                 .compact();
     }
 
-    public UserDetails getUserFromToken(String token) {
+    public AppUser getUserFromToken(String token) {
         if (token == null || !token.startsWith("Bearer ")) {
             return null;
         }
@@ -51,11 +52,10 @@ public class JwtConverter {
                     .parseClaimsJws(token.substring(7));
 
             String username = jws.getBody().getSubject();
-//            int id = (int)jws.getBody().get("id");
-            String authStr = (String) jws.getBody().get("authorities");
+            ObjectId id = new ObjectId(jws.getBody().get("id", String.class));
+            String role = jws.getBody().get("authorities", String.class);
 
-            return new AppUser(id, username, null, true,
-//                    Arrays.asList(authStr.split(",")));
+            return new AppUser(id, username, null, true, role);
 
         } catch (JwtException e) {
             System.out.println(e);

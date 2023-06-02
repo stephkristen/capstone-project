@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,7 +42,7 @@ public class AuthController {
             Authentication authentication = authenticationManager.authenticate(authToken);
 
             if (authentication.isAuthenticated()) {
-                String jwtToken = converter.getTokenFromUser((UserDetails) authentication.getPrincipal());
+                String jwtToken = converter.getTokenFromUser((AppUser) authentication.getPrincipal());
 
                 HashMap<String, String> map = new HashMap<>();
                 map.put("jwt_token", jwtToken);
@@ -57,9 +58,8 @@ public class AuthController {
     }
 
     @PostMapping("/refresh_token")
-    public ResponseEntity<Map<String, String>> refreshToken(UsernamePasswordAuthenticationToken principal) {
-        User user = new User(principal.getName(), principal.getName(), principal.getAuthorities());
-        String jwtToken = converter.getTokenFromUser(user);
+    public ResponseEntity<Map<String, String>> refreshToken(@AuthenticationPrincipal AppUser appUser) {
+        String jwtToken = converter.getTokenFromUser(appUser);
 
         HashMap<String, String> map = new HashMap<>();
         map.put("jwt_token", jwtToken);
