@@ -1,7 +1,7 @@
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useState, useContext, useEffect } from 'react';
-import { authenticate } from '../services/auth';
-import AuthContext from '../contexts/AuthContext';
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useState, useContext, useEffect } from "react";
+import { authenticate } from "../services/auth";
+import AuthContext from "../contexts/AuthContext";
 
 const INITIAL_USER = {
   username: "",
@@ -40,7 +40,10 @@ function Login() {
   }, [location.state]);
 
   return (
-    <form onSubmit={handleSubmit} className="p-5">
+    <form
+      onSubmit={handleSubmit}
+      className="container-fluid py-5"
+      style={{ backgroundColor: "rgba(140, 191, 248, 0.521)" }}>
       <h3>Log In</h3>
       {location.state?.msg && (
         <div className="alert alert-success" role="alert">
@@ -48,7 +51,7 @@ function Login() {
         </div>
       )}
       <div className="mb-3 row">
-        <label htmlFor="username" className="col-form-label col-sm-2">
+        <label htmlFor="username" className="col-form-label">
           Username
         </label>
         <div className="col-sm-8">
@@ -63,8 +66,8 @@ function Login() {
           ></input>
         </div>
       </div>
-      <div className="mb-2 row">
-        <label htmlFor="password" className="form-label col-sm-2">
+      <div className="mb-3 row">
+        <label htmlFor="password" className="form-label">
           Password
         </label>
         <div className="col-sm-8">
@@ -80,7 +83,7 @@ function Login() {
         </div>
       </div>
 
-      <div>
+      <div className="py-2">
         <button className="btn btn-primary" type="submit">
           Login
         </button>
@@ -88,11 +91,16 @@ function Login() {
           Cancel
         </Link>
       </div>
+      <div className="py-2">
+        <p>
+          No Account? Click <Link to="/signup">here</Link> to sign up!
+        </p>
+      </div>
 
       {error && (
         <div className="alert alert-danger" role="alert">
-          No user was found with that username and password combination. Please try
-          again or click <Link to="/signup">here</Link> to sign up!
+          No user was found with that username and password combination. Please
+          try again.
         </div>
       )}
     </form>

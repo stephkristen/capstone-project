@@ -1,1 +1,13 @@
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: rgb(60, 95, 160) !important;
+    border-color: rgb(60, 95, 160) !important;
+}
+
+body {
+    background-color: #090908 !important;
+}
+
+#navbar {
+    background-color: rgba(5, 2, 19, 0.5) !important;
+}
 
