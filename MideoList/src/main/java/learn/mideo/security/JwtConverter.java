@@ -2,6 +2,7 @@ package learn.mideo.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import learn.mideo.model.AppUser;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +22,7 @@ public class JwtConverter {
     private final int EXPIRATION_MINUTES = 20;
     private final int EXPIRATION_MILLIS = EXPIRATION_MINUTES * 60 * 1000;
 
-    public String getTokenFromUser(UserDetails user) {
+    public String getTokenFromUser(AppUser user) {
 
         String authorities = user.getAuthorities().stream()
                 .map(i -> i.getAuthority())
@@ -30,6 +31,7 @@ public class JwtConverter {
         return Jwts.builder()
                 .setIssuer(ISSUER)
                 .setSubject(user.getUsername())
+                .claim("id", user.getId())
                 .claim("authorities", authorities)
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_MILLIS))
                 .signWith(key)
@@ -49,13 +51,11 @@ public class JwtConverter {
                     .parseClaimsJws(token.substring(7));
 
             String username = jws.getBody().getSubject();
+//            int id = (int)jws.getBody().get("id");
             String authStr = (String) jws.getBody().get("authorities");
 
-            List<SimpleGrantedAuthority> roles = Arrays.stream(authStr.split(","))
-                    .map(r -> new SimpleGrantedAuthority(r))
-                    .collect(Collectors.toList());
-
-            return new User(username, username, roles);
+            return new AppUser(id, username, null, true,
+//                    Arrays.asList(authStr.split(",")));
 
         } catch (JwtException e) {
             System.out.println(e);

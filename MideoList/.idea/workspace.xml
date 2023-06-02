@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="7445f538-10de-43ad-9731-b227dc92f73c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/http/requests.http" beforeDir="false" afterPath="$PROJECT_DIR$/http/requests.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/learn/mideo/model/AppUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/mideo/model/AppUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/learn/mideo/security/JwtRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/mideo/security/JwtRequestFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/learn/mideo/security/JwtConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/learn/mideo/security/JwtConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

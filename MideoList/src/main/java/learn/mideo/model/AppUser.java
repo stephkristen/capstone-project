@@ -1,6 +1,8 @@
 package learn.mideo.model;
 
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 
+@Document(collection="app_user")
 public class AppUser implements UserDetails {
 
     private ObjectId id;
@@ -18,6 +21,7 @@ public class AppUser implements UserDetails {
     private final String role;
 
 
+    @PersistenceConstructor
     public AppUser(ObjectId id, String username, String passwordHash, boolean enabled, String role) {
         this.id = id;
         this.username = username;
