@@ -6,8 +6,9 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import { useState, useEffect } from 'react';
-import AuthContext from './contexts/AuthContext';
+import { useState, useEffect } from "react";
+import AuthContext from "./contexts/AuthContext";
+import "./index.css";
 
 import AddModal from "./components/AddModal";
 import FormErrors from "./components/FormErrors";
@@ -24,6 +25,7 @@ import WatchableDetails from "./components/WatchableDetails";
 import WatchableTable from "./components/WatchableTable";
 import './index.css';
 import './App.scss';
+// import { refresh } from './services/auth';
 
 function App() {
   const [user, setUser] = useState(null);
