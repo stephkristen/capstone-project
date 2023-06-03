@@ -1,6 +1,6 @@
 // import background from '../images/reel-bw.jpg';
 import background from '../images/projector-bw.jpg'
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function Home() {
 
@@ -29,39 +29,50 @@ function Home() {
         // 	console.error(error);
 // }
 
-    const [trailer, setTrailer] = useState('');
+const [trailer, setTrailer] = useState('');
 
-    async function getWatchableFromAPI() {
-        // Returns 1 item
-    //     const url = 'https://streaming-availability.p.rapidapi.com/v2/get/basic?country=us&imdb_id=tt1877830&output_language=en';
-    //     const options = {
-    //         method: 'GET',
-    //         headers: {
-    //             'X-RapidAPI-Key': '29529a668bmsh6a9f62367cbcd5ap1f0a53jsncd59c509341f',
-    //             'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
-    //         }
-    //     };
+async function getWatchableFromAPI() {
+  const url =
+    'https://streaming-availability.p.rapidapi.com/v2/get/basic?country=us&imdb_id=tt1877830&output_language=en';
+  const options = {
+    method: 'GET',
+    headers: {
+      'X-RapidAPI-Key': '29529a668bmsh6a9f62367cbcd5ap1f0a53jsncd59c509341f',
+      'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com',
+    },
+  };
 
-    //     try {
-    //         const response = await fetch(url, options);
-    //         const result = await response.json();
-    //         console.log(result);
+  try {
+    const response = await fetch(url, options);
+    if (response.status === 200) {
+        
+        const data = await response.json();
+        console.log(data);
+        
+        console.log(data.result.youtubeTrailerVideoLink);
 
-    //         const trailerLink = result.youtubeTrailerVideoLink;
-    //         console.log(trailerLink);
-    //         // setTrailer();
-            
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    
+        const trailerLink = data.result.youtubeTrailerVideoLink
+
+        setTrailer(trailerLink); // Update the trailer state
+
     }
-    console.log(getWatchableFromAPI());
+   
+  } catch (error) {
+    console.error(error);
+  }
+}
 
-    useEffect(() => {
-        getWatchableFromAPI();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+// console.log(getWatchableFromAPI());
+
+useEffect(() => {
+  getWatchableFromAPI();
+
+  const intervalId = setInterval(getWatchableFromAPI, 24 * 60 * 60 * 1000); // Fetch a new trailer every 24 hours
+
+  return () => {
+    clearInterval(intervalId);
+  };
+}, []);
 
     return (
         <div>
@@ -72,20 +83,33 @@ function Home() {
                         <h1 className="display-4">MideoList
                         </h1>
                         <p className="lead">Keep track of your watching history and plan what you want to watch next.</p>
+                        
                     </div>
+                    {/* <button className='btn btn-info'>Sign Up</button>
+                <button className='btn btn-info'>Log in</button> */}
                     </div>
                 </div>
             </div>
-            <div classname='container-fluid bg-transparent rounded text-dark p-5' style={{ color: 'white'}}>
-            {/* <button className='btn btn-info'>Test</button> */}
+            <div className='container-fluid bg-transparent rounded text-dark p-5' style={{ color: 'white'}}>
             <div className="container p-5 col-12 text-center">
                 <p className='lead'>Check out this trailer!</p>
             </div>
-            <video>
-                <source src= { trailer } type='video/webm'/>
-                {/* { trailer } */}
-                Trailer coming soon!
-            </video>
+            <div className=''>
+                <video controls>
+                    <source src={trailer} type="video/webm" />
+                    Your browser does not support the video tag.
+                </video>
+
+                <p>
+                We can't show you the trailer here, but if you'd still like to see it, click
+                here:{" "}
+                    <a href={trailer} target="_blank" rel="noopener noreferrer">
+                    link to the video
+                    </a>
+                    .
+                </p>
+
+            </div>
             </div>
         </div>
         
