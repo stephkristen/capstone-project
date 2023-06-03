@@ -1,7 +1,7 @@
 // import background from '../images/reel-bw.jpg';
 import background from '../images/projector-bw.jpg'
 import React, { useEffect, useState } from 'react';
-
+import YouTube from 'react-youtube';
 function Home() {
 
     // get watchable object from rapidapi
@@ -30,6 +30,9 @@ function Home() {
 // }
 
 const [trailer, setTrailer] = useState('');
+const [title, setTitle] = useState('');
+const [trailerId, setTrailerId] = useState('');
+
 
 async function getWatchableFromAPI() {
   const url =
@@ -49,12 +52,17 @@ async function getWatchableFromAPI() {
         const data = await response.json();
         console.log(data);
         
-        console.log(data.result.youtubeTrailerVideoLink);
+        // console.log(data.result.youtubeTrailerVideoLink);
 
-        const trailerLink = data.result.youtubeTrailerVideoLink
+        const trailerLink = data.result.youtubeTrailerVideoLink;
 
-        setTrailer(trailerLink); // Update the trailer state
+        const watchableTitle = data.result.title;
 
+        const trailerId = data.result.youtubeTrailerVideoId;
+
+        setTrailer(trailerLink);
+        setTitle(watchableTitle);
+        setTrailerId(trailerId);
     }
    
   } catch (error) {
@@ -84,7 +92,12 @@ useEffect(() => {
                         </h1>
                         <p className="lead">Keep track of your watching history and plan what you want to watch next.</p>
                         
+                        {/* <p>
+                             Just add any "watchables" to a list. Watchables can be a movie or show.
+                        </p> */}
                     </div>
+                    <div className='text-center'><button className='btn btn-light'>Learn More</button></div>
+                    {/* Learn more links to a div down below that explains what the site is about next to featured trailer*/}
                     {/* <button className='btn btn-info'>Sign Up</button>
                 <button className='btn btn-info'>Log in</button> */}
                     </div>
@@ -94,19 +107,14 @@ useEffect(() => {
             <div className="container p-5 col-12 text-center">
                 <p className='lead'>Check out this trailer!</p>
             </div>
-            <div className=''>
-                <video controls>
-                    <source src={trailer} type="video/webm" />
-                    Your browser does not support the video tag.
-                </video>
+            <div  className="embed-responsive embed-responsive-16by9" style={{ color: 'white'}}>
+                <YouTube videoId={trailerId} />
 
-                <p>
-                We can't show you the trailer here, but if you'd still like to see it, click
-                here:{" "}
+                <p> 
+                    Have you seen this: {" "}
                     <a href={trailer} target="_blank" rel="noopener noreferrer">
-                    link to the video
+                    {title}
                     </a>
-                    .
                 </p>
 
             </div>

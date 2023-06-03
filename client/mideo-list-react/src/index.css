@@ -10,10 +10,10 @@ html {
     height: 100% !important;
 }
 
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+/* .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
     background-color: rgb(60, 95, 160) !important;
     border-color: rgb(60, 95, 160) !important;
-}
+} */
 
 body {
     background-color: #090908 !important;
