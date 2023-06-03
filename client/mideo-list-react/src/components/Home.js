@@ -87,42 +87,43 @@ useEffect(() => {
             <div className='container-fluid bg-transparent rounded text-dark p-5' style={{ background: `url(${background}) no-repeat center center fixed` }}>
                 <div className="container p-5" style={{ color: 'white' }}>
                     <div className="row h-100 align-items-center">
-                    <div id='text-box' className="rounded col-12 text-center">
-                        <h1 className="display-4">MideoList
-                        </h1>
-                        <p className="lead">Keep track of your watching history and plan what you want to watch next.</p>
-                        
-                        {/* <p>
-                             Just add any "watchables" to a list. Watchables can be a movie or show.
-                        </p> */}
-                    </div>
-                    <div className='text-center'><button className='btn btn-light'>Learn More</button></div>
+                        <div id='text-box' className="rounded col-12 text-center">
+                            <h1 className="display-4">MideoList
+                            </h1>
+                            <p className="lead">Keep track of your watching history and plan what you want to watch next.</p>
+                    
+                    {/* <p>
+                         Just add any "watchables" to a list. Watchables can be a movie or show.
+                    </p> */}
+                        </div>
+                        <div className='text-center'><button className='btn btn-light'>Learn More</button></div>
                     {/* Learn more links to a div down below that explains what the site is about next to featured trailer*/}
                     {/* <button className='btn btn-info'>Sign Up</button>
                 <button className='btn btn-info'>Log in</button> */}
                     </div>
                 </div>
             </div>
-            <div className='container-fluid bg-transparent rounded text-dark p-5' style={{ color: 'white'}}>
-            <div className="container p-5 col-12 text-center">
-                <p className='lead'>Check out this trailer!</p>
+            <div className='container-fluid bg-transparent rounded p-5'>
+                <div className="container p-5 col-12 text-center" style={{ color: 'white'}}>
+                    <p className='lead'>Have you seen this trailer? Check it out!</p>
+                </div>
+                <div style={{ margin: '0 auto', width: 'fit-content' }}>
+                    <div style={{ position: 'relative' }}>
+                        <p style={{ position: 'absolute', top: -30, left: 0, color: 'white', margin: '10px' }}>
+                            <a href={trailer} target="_blank" rel="noopener noreferrer" style={{ color: 'white' }}>
+                            {title}
+                            </a>
+                        </p>
+                        <div className="embed-responsive embed-responsive-16by9" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <div style={{ width: '100%', height: '100%' }}>
+                                <YouTube videoId={trailerId} title={title} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div  className="embed-responsive embed-responsive-16by9" style={{ color: 'white'}}>
-                <YouTube videoId={trailerId} />
-
-                <p> 
-                    Have you seen this: {" "}
-                    <a href={trailer} target="_blank" rel="noopener noreferrer">
-                    {title}
-                    </a>
-                </p>
-
-            </div>
-            </div>
-        </div>
-        
+        </div>  
     );
-
 }
 
 export default Home;
