@@ -44,7 +44,7 @@ function App() {
               <Route path="/search" element={<Search />} />
               <Route path="/results" element={<Results />} />
               <Route path="/watchlist" element={<WatchableTable />} />
-              <Route path="/details/:id" element={<WatchableDetails />} />
+              <Route path="/details/:imdbId" element={<WatchableDetails />} />
               <Route path="*" element={<NotFound />} />
               <Route path="/error" element={<Error></Error>}></Route>
               <Route
