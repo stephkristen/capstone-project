@@ -17,52 +17,55 @@ function Home() {
     
     // hard-coded genreId list from API
     const genreIdList = [1,2,4,5,6,7,12,14,16,18,27,28,35,36,37,53,80,99,878,9648,10402,10749,10751,10752,10763,10764,10767];
-    const genreId = 0;
+    console.log(genreIdList);
+
+    let genreId = 0;
 
     function getRandomGenreId() {
-        genreId = (genreIdList[(Math.floor(Math.random() * genreIdList.length))]);
+        const random = Math.floor(Math.random() * genreIdList.length);
+        return genreId = genreIdList[random];
     }
 
     // is the method working?
-    console.log(getRandomGenreId);
+    console.log(getRandomGenreId());
 
-    async function getWatchableFromAPI() {
-    // Returns list of JSON watchable objects:
-        const url = `https://streaming-availability.p.rapidapi.com/v2/search/basic?country=us&services=netflix%2Cprime.buy%2Chulu.addon.hbo%2Cpeacock.free&output_language=en&show_type=all&genre=${genreId}&show_original_language=en`;
-        const options = {
-            method: 'GET',
-            headers: {
-                'X-RapidAPI-Key': '29529a668bmsh6a9f62367cbcd5ap1f0a53jsncd59c509341f',
-                'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
-            }
-        };
+    // async function getWatchableFromAPI() {
+    // // Returns list of JSON watchable objects:
+    //     const url = `https://streaming-availability.p.rapidapi.com/v2/search/basic?country=us&services=netflix%2Cprime.buy%2Chulu.addon.hbo%2Cpeacock.free&output_language=en&show_type=all&genre=${genreId}&show_original_language=en`;
+    //     const options = {
+    //         method: 'GET',
+    //         headers: {
+    //             'X-RapidAPI-Key': '29529a668bmsh6a9f62367cbcd5ap1f0a53jsncd59c509341f',
+    //             'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
+    //         }
+    //     };
         
-        // console.log()
+    //     // console.log()
 
-        try {
-            const response = await fetch(url, options);
-            if (response.status === 200) {
+    //     try {
+    //         const response = await fetch(url, options);
+    //         if (response.status === 200) {
                 
-                const data = await response.json();
-                // console.log(data);
+    //             const data = await response.json();
+    //             // console.log(data);
 
-                // how to get one object? 
-                // dot in to a specific or random position?
-                // function getRandomWatchableObject() {
-                //     genreId = (genreIdList[(Math.floor(Math.random() * genreIdList.length))]);
-                // }
+    //             // how to get one object? 
+    //             // dot in to a specific or random position?
+    //             // function getRandomWatchableObject() {
+    //             //     genreId = (genreIdList[(Math.floor(Math.random() * genreIdList.length))]);
+    //             // }
 
-                // get specific trailer
-                const trailerLink = data.result.youtubeTrailerVideoLink;
-                const watchableTitle = data.result.title;
-                const trailerId = data.result.youtubeTrailerVideoId;
+    //             // get specific trailer
+    //             const trailerLink = data.result.youtubeTrailerVideoLink;
+    //             const watchableTitle = data.result.title;
+    //             const trailerId = data.result.youtubeTrailerVideoId;
 
-                setTrailer(trailerLink);
-                setTitle(watchableTitle);
-                setTrailerId(trailerId);
-            }
+    //             setTrailer(trailerLink);
+    //             setTitle(watchableTitle);
+    //             setTrailerId(trailerId);
+    //         }
 
-    }
+    // }
 
 // async function getWatchableFromAPI() {
 //   const url =
@@ -97,15 +100,15 @@ function Home() {
 //   }
 // }
 
-useEffect(() => {
-  getWatchableFromAPI();
+// useEffect(() => {
+//   getWatchableFromAPI();
 
-//   const intervalId = setInterval(getWatchableFromAPI, 24 * 60 * 60 * 1000); // Fetch a new trailer every 24 hours
+// //   const intervalId = setInterval(getWatchableFromAPI, 24 * 60 * 60 * 1000); // Fetch a new trailer every 24 hours
 
-//   return () => {
-//     clearInterval(intervalId);
-//   };
-}, []);
+// //   return () => {
+// //     clearInterval(intervalId);
+// //   };
+// }, []);
 
     return (
         <div>
