@@ -70,10 +70,12 @@ public class AuthController {
     @PostMapping("/create_account")
     public ResponseEntity<?> createAccount(@RequestBody Map<String, String> credentials) {
 
+        String firstName = credentials.get("firstname");
+        String lastName = credentials.get("lastname");
         String username = credentials.get("username");
         String password = credentials.get("password");
 
-        Result<AppUser> result = appUserService.create(username, password);
+        Result<AppUser> result = appUserService.create(firstName, lastName, username, password);
 
         // unhappy path...
         if (!result.isSuccess()) {

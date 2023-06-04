@@ -33,7 +33,7 @@ public class SecurityConfig {
                  .antMatchers("/create_account").permitAll()
                  .antMatchers("/refresh_token").authenticated()
                  .antMatchers(HttpMethod.GET,
-                         "/watchlist").hasAnyAuthority("USER", "ADMIN")
+                         "/watchlist").permitAll()
                  .antMatchers(HttpMethod.POST,
                          "/search").hasAnyAuthority("USER", "ADMIN")
                  .antMatchers(HttpMethod.PUT,
