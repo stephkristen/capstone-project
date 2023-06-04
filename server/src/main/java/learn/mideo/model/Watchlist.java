@@ -14,21 +14,21 @@ public class Watchlist {
     private String id;
     private String type;
     private List<String> watchables;
-    private final AppUser user;
+    private String userId;
 
 
     @PersistenceConstructor
-    public Watchlist(String id, String type, List<String> watchables, AppUser user) {
+    public Watchlist(String id, String type, List<String> watchables, String userId) {
         this.id = id;
         this.type = type;
         this.watchables = watchables;
-        this.user = user;
+        this.userId = userId;
     }
 
-    public Watchlist(String type, List<String> watchables, AppUser user) {
+    public Watchlist(String type, List<String> watchables, String userId) {
         this.type = type;
         this.watchables = watchables;
-        this.user = user;
+        this.userId = userId;
     }
 
     public String getId() {
@@ -55,7 +55,7 @@ public class Watchlist {
         this.watchables = watchables;
     }
 
-    public AppUser getUser() {
-        return user;
+    public String getUserId() {
+        return userId;
     }
 }

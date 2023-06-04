@@ -21,12 +21,16 @@ public class WatchlistController {
     @GetMapping
     public ResponseEntity< List < Watchlist >> findAll() {
         return ResponseEntity.ok().body(service.findAll());
-//        return ObjectMapperUtils.mapAll(service.findAll(), WatchlistDTO.class);
     }
 
-    @GetMapping(value = "/{userId}")
-    public ResponseEntity<Watchlist> getWatchlistByUserId(@PathVariable("user.id") String userId) {
+    @GetMapping(value = "/byUserId/{userId}")
+    public ResponseEntity< List <Watchlist> > getWatchlistByUserId(@PathVariable("userId") String userId) {
         return ResponseEntity.ok().body(service.findByUserId(userId));
+    }
+
+    @GetMapping(value = "/byType/{userId}/{type}")
+    public ResponseEntity<Watchlist> getWatchlistByType(@PathVariable("userId") String userId, @PathVariable("type") String type) {
+        return ResponseEntity.ok().body(service.findByType(userId, type));
     }
 //
 //    @PostMapping(value = "/save")

@@ -23,6 +23,7 @@ public class AppUser implements UserDetails {
     @NotBlank
     @Indexed(unique = true)
     private final String username;
+
     private final String passwordHash;
     private final boolean enabled;
     private final String role;

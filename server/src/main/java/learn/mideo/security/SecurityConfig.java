@@ -40,7 +40,7 @@ public class SecurityConfig {
                          "/watchlist").hasAnyAuthority("USER", "ADMIN")
                  .antMatchers(HttpMethod.DELETE,
                          "/watchlist").hasAnyAuthority("USER", "ADMIN")
-                 .antMatchers("/**").denyAll()
+                 .antMatchers("/**").permitAll()
                  .and()
                  .addFilter(new JwtRequestFilter(authenticationManager(authConfig), converter))
                  .sessionManagement()
