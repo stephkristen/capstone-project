@@ -33,6 +33,11 @@ function WatchableDetails() {
         getDetails();
     }, [imdbId]);
 
+    let videoId = '';
+    if (watchable && watchable.youtubeTrailerVideoLink) {
+        videoId = watchable.youtubeTrailerVideoLink.split('v=')[1];
+    }
+
     return (
         <div className="container">
             {watchable && (
@@ -76,16 +81,20 @@ function WatchableDetails() {
                         </tr>
                         <tr>
                         <td colSpan="2" className="trailer-cell">
-                            <YouTube
-                                videoId={watchable.youtubeTrailerVideoLink}
-                                opts={{
-                                width: '560',
-                                height: '315',
-                                playerVars: {
-                                    autoplay: 0,
-                                },
-                                }}
-                            />
+                            {videoId ? (
+                                <YouTube
+                                    videoId={videoId}
+                                    opts={{
+                                        width: '560',
+                                        height: '315',
+                                        playerVars: {
+                                            autoplay: 0,
+                                        },
+                                    }}
+                                />
+                            ) : (
+                                <p className="white-text">No trailer available</p>
+                            )}
                         </td>
                         </tr>
                         </tbody>

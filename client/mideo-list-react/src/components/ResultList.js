@@ -19,7 +19,7 @@ function ResultList({ watchable, index }) {
                 <Link to={`/details/${imdbId}`}>{watchable.title}</Link>
                 </h5>
                 <p>{watchable.type}</p>
-                <p>IMDB Rating: {watchable.imdbRating}</p>
+                <p>IMDB Rating: {watchable.imdbRating}/100</p>
             </td>
             <td className="white-text">
                 <p>{watchable.overview}</p>
