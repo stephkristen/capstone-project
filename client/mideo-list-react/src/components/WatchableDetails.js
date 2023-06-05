@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import API_KEY from "./config";
 import YouTube from 'react-youtube';
+import { Link } from "react-router-dom";
 
 function WatchableDetails() {
     const [watchable, setWatchable] = useState(null);
@@ -73,6 +74,11 @@ function WatchableDetails() {
                                 Streaming On: {''}
                                 {Object.keys(watchable.streamingInfo.us).join(", ")}
                             </p>
+                            </td>
+                            <td>
+                                <Link className="btn btn-secondary" to={'/AddModal/'}>
+                                    Add
+                                </Link>
                             </td>
                         </tr>
                         <tr>
