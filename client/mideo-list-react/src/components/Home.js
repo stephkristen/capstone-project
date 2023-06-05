@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import YouTube from 'react-youtube';
 
 // TODO:
-    // Add learn more section
+    // Add about section
     // add sign up button
     // add log in button
 
@@ -75,51 +75,46 @@ function Home() {
         }
     }
 
-    useEffect(() => {
-        const fetchData = async () => {
-            await getWatchableFromAPI();
-        };
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         await getWatchableFromAPI();
+    //     };
 
-        fetchData();
-    }, []);
+    //     fetchData();
+    // }, []);
 
     return (
         <div>
-            <div className='container-fluid bg-transparent rounded text-dark p-5' style={{ background: `url(${background}) no-repeat center center fixed` }}>
+            <div className='masthead container-fluid rounded text-dark p-5' style={{ background: `url(${background}) no-repeat center center fixed` }}>
                 <div className="container p-5" style={{ color: 'white' }}>
-                    <div className="row h-100 align-items-center">
-                        <div id='text-box' className="rounded col-12 text-center">
-                            <h1 className="display-4">MideoList
-                            </h1>
-                            <p className="lead">Keep track of your watching history and plan what you want to watch next.</p>
+                    <div className="row h-100 align-items-center p-5">
+                        <div className="container h-100">
+                            <div className="row h-100 align-items-center">
+                                <div  id='text-box' className="rounded col-12 text-center">
+                                    <h1 className="display-4 p-3">MideoList</h1>
+                                    <p className="lead">Keep track of your watching history and plan what you want to watch next. Not sure what you want to watch? Grab a random trailer to help you get started!</p>
+                                    <div className="container col-12 p-3">
+                                        <button onClick={getWatchableFromAPI} className='btn btn-light'>Trailer</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div className='text-center'><button className='btn btn-light'>Learn More</button></div>
-                    {/* Learn more links to a div down below that explains what the site is about next to featured trailer*/}               
-                    {/* <p>
-                         About MideoList: Our goal is to help people track their movies and series watching history through 3 different lists. Watchables can be a movie or show. Just add any "watchables" to a list. 
-                    </p> */}
-                    {/* <button className='btn btn-info'>Sign Up</button>
-                <button className='btn btn-info'>Log in</button> */}
                     </div>
                 </div>
             </div>
             <div className='container-fluid bg-transparent rounded p-5'>
-                <div className="container p-5 col-12 text-center" style={{ color: 'white'}}>
-                    <p className='lead'>Not sure what you want to watch? Here is a trailer to get you started!</p>
-                    {/* <div className='my-3'>
-                            <button onClick={getWatchableFromAPI} className='btn btn-light'>Trailer</button>
-                        </div> */}
-                </div>
                 <div style={{ margin: 'auto', width: 'fit-content' }}>
                     <div style={{ position: 'relative' }}>
                             {trailerId && (
                                 <>
-                                    <div className="embed-responsive embed-responsive-16by9" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                                        <div style={{ width: '100%', height: '100%' }}>
-                                            <YouTube videoId={trailerId} title={title} />
+                                    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                        <div>
+                                            <div className=" embed-responsive-16by9" style={{ width: '100%', height: '100%' }}>
+                                                <YouTube videoId={trailerId} title={title} />
+                                            </div>
                                         </div>
                                     </div>
-                                    <p style={{ position: 'absolute', bottom: -40, left: 0, color: 'white', margin: '10px' }}>
+                                    <p style={{ position: 'absolute', bottom: -50, left: 0, color: 'white', margin: '10px' }}>
                                         <a href={trailer} target="_blank" rel="noopener noreferrer" style={{ color: 'white' }}> Watch the trailer on YouTube: {' '}
                                             {title}
                                         </a>

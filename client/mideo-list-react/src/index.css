@@ -25,5 +25,14 @@ body {
 }
 
 #text-box {
-    background-color: rgb(9, 9, 8, .2);
+    background-color: rgb(9, 9, 8, .5);
+}
+
+.masthead {
+    height: 100vh;
+    min-height: 500px;
+    background-image: url('https://source.unsplash.com/BtbjCFUvBXs/1920x1080');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
