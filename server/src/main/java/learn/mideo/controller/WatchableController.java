@@ -30,7 +30,7 @@ public class WatchableController {
     public ResponseEntity<Object> addWatchable(@RequestBody Watchable watchable) {
         return ResponseEntity.ok().body(service.save(watchable));
     }
-
-    @PutMapping(value= "/watchable/{id}")
-    public ResponseEntity<>
+//
+//    @PutMapping(value= "/watchable/{id}")
+//    public ResponseEntity<>
 }
