@@ -9,12 +9,14 @@ import java.util.List;
 public class AppUserMapper {
 
     public AppUser mapDocument(Document doc) {
-        ObjectId id = doc.getObjectId("_id");
+        String id = doc.getString("_id");
         String username = doc.getString("username");
         String passwordHash = doc.getString("password_hash");
         boolean enabled = doc.getBoolean("enabled");
         String role = doc.getString("role");
+        String firstName = doc.getString("firstname");
+        String lastName = doc.getString("lastname");
 
-        return new AppUser(id, username, passwordHash, enabled, role);
+        return new AppUser(id, firstName, lastName, username, passwordHash, enabled, role);
     }
 }
