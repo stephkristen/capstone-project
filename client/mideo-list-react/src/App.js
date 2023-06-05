@@ -44,7 +44,7 @@ function App() {
               <Route path="/search" element={<Search />} />
               <Route path="/results" element={<Results />} />
               <Route path="/watchlist" element={user ? <Watchlist /> : <Navigate to='/login' />} />
-              <Route path="/details/:id" element={<WatchableDetails />} />
+              <Route path="/details/:imdbId" element={<WatchableDetails />} />
               <Route path="*" element={<NotFound />} />
               <Route path="/error" element={<Error></Error>}></Route>
               <Route path="/login" element={!user ? <Login /> : <Navigate to="/" replace={true} />} />

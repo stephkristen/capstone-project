@@ -3,6 +3,15 @@
     border-color: rgb(60, 95, 160) !important;
 }
 
+.white-text {
+    color: white;
+}
+
+.title-white-text {
+    color: white;
+    margin-top: 50px;
+}
+
 /* body {
     background-color: #090908 !important;
 }
