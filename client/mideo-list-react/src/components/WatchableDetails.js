@@ -2,11 +2,21 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
 import API_KEY from "./config";
 import YouTube from 'react-youtube';
-import { Link } from "react-router-dom";
+import Modal from "react-modal";
+import AddModal from "./AddModal";
 
 function WatchableDetails() {
     const [watchable, setWatchable] = useState(null);
+    const [modalOpen, setModalOpen] = useState(false);
     const { imdbId } = useParams();
+
+    const openModal = () => {
+        setModalOpen(true);
+    };
+
+    const closeModal= () => {
+        setModalOpen(false);
+    };
 
     async function getDetails() {
         const url = `https://streaming-availability.p.rapidapi.com/v2/get/basic?country=us&imdb_id=${imdbId}&output_language=en`;
@@ -76,10 +86,18 @@ function WatchableDetails() {
                             </p>
                             </td>
                             <td>
-                                <Link className="btn btn-secondary" to={'/AddModal/'}>
+                                <button className="btn btn-secondary" onClick={openModal}>
                                     Add
-                                </Link>
+                                </button>
                             </td>
+
+                            <Modal
+                                isOpen={modalOpen}
+                                onRequestClose={closeModal}
+                                contentLabel="Add Modal"
+                            >
+                                <AddModal closeModal={closeModal} watchable={watchable} />
+                            </Modal>
                         </tr>
                         <tr>
                             <h6 className="white-text">Synopsis:</h6>
