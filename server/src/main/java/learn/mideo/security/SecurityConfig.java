@@ -33,14 +33,14 @@ public class SecurityConfig {
                  .antMatchers("/create_account").permitAll()
                  .antMatchers("/refresh_token").authenticated()
                  .antMatchers(HttpMethod.GET,
-                         "/watchlist").hasAnyAuthority("USER", "ADMIN")
+                         "/watchlist").permitAll()
                  .antMatchers(HttpMethod.POST,
                          "/search").hasAnyAuthority("USER", "ADMIN")
                  .antMatchers(HttpMethod.PUT,
                          "/watchlist").hasAnyAuthority("USER", "ADMIN")
                  .antMatchers(HttpMethod.DELETE,
                          "/watchlist").hasAnyAuthority("USER", "ADMIN")
-                 .antMatchers("/**").denyAll()
+                 .antMatchers("/**").permitAll()
                  .and()
                  .addFilter(new JwtRequestFilter(authenticationManager(authConfig), converter))
                  .sessionManagement()

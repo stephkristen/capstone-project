@@ -34,6 +34,7 @@ public class JwtConverter {
                 .setSubject(user.getUsername())
                 .claim("id", user.getId())
                 .claim("authorities", authorities)
+                .claim("firstName", user.getFirstName())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_MILLIS))
                 .signWith(key)
                 .compact();
@@ -52,10 +53,10 @@ public class JwtConverter {
                     .parseClaimsJws(token.substring(7));
 
             String username = jws.getBody().getSubject();
-            ObjectId id = new ObjectId(jws.getBody().get("id", String.class));
+            String id = jws.getBody().get("id", String.class);
             String role = jws.getBody().get("authorities", String.class);
 
-            return new AppUser(id, username, null, true, role);
+            return new AppUser(id, null, null, username, null, true, role);
 
         } catch (JwtException e) {
             System.out.println(e);

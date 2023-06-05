@@ -25,7 +25,6 @@ function Login() {
     authenticate(user)
       .then((loggedInUser) => {
         login(loggedInUser);
-        // TODO : fix navigation for after they hit submit button
         navigate("/");
       })
       .catch(() => setError(true));
