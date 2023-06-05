@@ -55,8 +55,9 @@ public class JwtConverter {
             String username = jws.getBody().getSubject();
             String id = jws.getBody().get("id", String.class);
             String role = jws.getBody().get("authorities", String.class);
+            String firstName = jws.getBody().get("firstName", String.class);
 
-            return new AppUser(id, null, null, username, null, true, role);
+            return new AppUser(id, firstName, null, username, null, true, role);
 
         } catch (JwtException e) {
             System.out.println(e);
