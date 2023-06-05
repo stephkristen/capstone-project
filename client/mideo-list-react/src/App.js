@@ -22,7 +22,7 @@ import Search from "./components/Search";
 import Watchables from "./components/Watchables";
 import WatchableDetails from "./components/WatchableDetails";
 import WatchableTable from "./components/WatchableTable";
-
+import Watchlist from "./components/Watchlist";
 import './index.css';
 import './App.scss';
 // import { refresh } from './services/auth';
@@ -43,8 +43,8 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/search" element={<Search />} />
               <Route path="/results" element={<Results />} />
-              <Route path="/watchlist" element={<WatchableTable />} />
-              <Route path="/details/:id" element={<WatchableDetails />} />
+              <Route path="/watchlist" element={user ? <Watchlist /> : <Navigate to='/login' />} />
+              <Route path="/details/:imdbId" element={<WatchableDetails />} />
               <Route path="*" element={<NotFound />} />
               <Route path="/error" element={<Error></Error>}></Route>
               <Route path="/login" element={!user ? <Login /> : <Navigate to="/" replace={true} />}/>

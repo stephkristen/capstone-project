@@ -7,7 +7,6 @@ import { createAccount } from "../services/auth";
 const INITIAL_USER = {
   firstname: "",
   lastname: "",
-  email: "",
   username: "",
   password: "",
 };
@@ -87,22 +86,6 @@ function SignUp() {
             value={user.username}
             onChange={handleChange}
             placeholder="Enter username"
-          ></input>
-        </div>
-      </div>
-      <div className="mb-3 row">
-        <label htmlFor="email" className="form-label col-sm-2">
-          Email
-        </label>
-        <div className="col-sm-8">
-          <input
-            type="text"
-            id="email"
-            name="email"
-            className="form-control"
-            value={user.email}
-            onChange={handleChange}
-            placeholder="email@test.com"
           ></input>
         </div>
       </div>
