@@ -8,7 +8,6 @@ import {
 
 import { useState, useEffect } from "react";
 import AuthContext from "./contexts/AuthContext";
-import "./index.css";
 
 import AddModal from "./components/AddModal";
 import FormErrors from "./components/FormErrors";
@@ -22,6 +21,7 @@ import SignUp from "./components/SignUp";
 import Search from "./components/Search";
 import Watchables from "./components/Watchables";
 import WatchableDetails from "./components/WatchableDetails";
+import WatchableTable from "./components/WatchableTable";
 import Watchlist from "./components/Watchlist";
 import './index.css';
 import './App.scss';
@@ -47,7 +47,7 @@ function App() {
               <Route path="/details/:imdbId" element={<WatchableDetails />} />
               <Route path="*" element={<NotFound />} />
               <Route path="/error" element={<Error></Error>}></Route>
-              <Route path="/login" element={!user ? <Login /> : <Navigate to="/" replace={true} />} />
+              <Route path="/login" element={!user ? <Login /> : <Navigate to="/" replace={true} />}/>
               <Route path="/signup" element={<SignUp />} />
             </Routes>
           </main>
