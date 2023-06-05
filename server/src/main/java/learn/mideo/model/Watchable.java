@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document(collection="watchables")
+@Document(collection="watchable")
 public class Watchable {
 
     @Id
@@ -14,42 +14,47 @@ public class Watchable {
     private String type;
     private String title;
     private String overview;
-    private double imdbRating;
+    private int imdbRating;
+    private int personalRating;
     private String trailerLink;
     private String posterPath;
     private int year;
     private int firstAirYear;
     private int lastAirYear;
-    private List<Genre> genres;
-    private List<StreamingService> streamingServices;
-    private List<CastMember> cast_members;
+    private List<String> genres;
+    private List<String> streamingServices;
+    private List<String> cast_members;
 
     @PersistenceConstructor
-    public Watchable(String id, String type, String title, String overview, double imdbRating, String trailerLink, String posterPath, int year, int firstAirYear, int lastAirYear, List<Genre> genres, List<StreamingService> streamingServices, List<CastMember> cast_members) {
+    public Watchable() {
+
+    }
+
+    public Watchable(String id, String type, String title, String overview, int imdbRating, int personalRating, String trailerLink, String posterPath, int year, List<String> genres, List<String> streamingServices, List<String> cast_members) {
         this.id = id;
         this.type = type;
         this.title = title;
         this.overview = overview;
         this.imdbRating = imdbRating;
+        this.personalRating = personalRating;
         this.trailerLink = trailerLink;
         this.posterPath = posterPath;
         this.year = year;
-        this.firstAirYear = firstAirYear;
-        this.lastAirYear = lastAirYear;
         this.genres = genres;
         this.streamingServices = streamingServices;
         this.cast_members = cast_members;
     }
 
-    public Watchable(String type, String title, String overview, double imdbRating, String trailerLink, String posterPath, int year, int firstAirYear, int lastAirYear, List<Genre> genres, List<StreamingService> streamingServices, List<CastMember> cast_members) {
+    public Watchable(String id, String type, String title, String overview, int imdbRating, int personalRating, String trailerLink, String posterPath, int firstAirYear, int lastAirYear, List<String> genres, List<String> streamingServices, List<String> cast_members) {
+        this.id = id;
         this.type = type;
         this.title = title;
         this.overview = overview;
         this.imdbRating = imdbRating;
+        this.personalRating = personalRating;
         this.trailerLink = trailerLink;
         this.posterPath = posterPath;
-        this.year = year;
-        this.firstAirYear = firstAirYear;
+        this.firstAirYear= firstAirYear;
         this.lastAirYear = lastAirYear;
         this.genres = genres;
         this.streamingServices = streamingServices;
@@ -88,11 +93,11 @@ public class Watchable {
         this.overview = overview;
     }
 
-    public double getImdbRating() {
+    public int getImdbRating() {
         return imdbRating;
     }
 
-    public void setImdbRating(double imdbRating) {
+    public void setImdbRating(int imdbRating) {
         this.imdbRating = imdbRating;
     }
 
@@ -136,27 +141,35 @@ public class Watchable {
         this.lastAirYear = lastAirYear;
     }
 
-    public List<Genre> getGenres() {
+    public List<String> getGenres() {
         return genres;
     }
 
-    public void setGenres(List<Genre> genres) {
+    public void setGenres(List<String> genres) {
         this.genres = genres;
     }
 
-    public List<StreamingService> getStreamingServices() {
+    public List<String> getStreamingServices() {
         return streamingServices;
     }
 
-    public void setStreamingServices(List<StreamingService> streamingServices) {
+    public void setStreamingServices(List<String> streamingServices) {
         this.streamingServices = streamingServices;
     }
 
-    public List<CastMember> getCast_members() {
+    public List<String> getCast_members() {
         return cast_members;
     }
 
-    public void setCast_members(List<CastMember> cast_members) {
+    public void setCast_members(List<String> cast_members) {
         this.cast_members = cast_members;
+    }
+
+    public int getPersonalRating() {
+        return personalRating;
+    }
+
+    public void setPersonalRating(int personalRating) {
+        this.personalRating = personalRating;
     }
 }

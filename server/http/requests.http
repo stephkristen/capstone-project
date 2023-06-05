@@ -55,3 +55,30 @@ Content-Type: application/json
     "username": "john@smith.com",
     "password": "P@ssw0rd!"
 }
+
+###
+
+POST http://localhost:8080/watchable HTTP/1.1
+Content-Type: application/json
+
+{
+    "type": "movie",
+    "title": "Dogma",
+    "overview": "Description",
+    "imdbRating": 7,
+    "personalRating": 8,
+    "year": 2000
+}
+
+#         this.id = id;
+        # this.type = type;
+        # this.title = title;
+        # this.overview = overview;
+        # this.imdbRating = imdbRating;
+        # this.personalRating = personalRating;
+        # this.trailerLink = trailerLink;
+        # this.posterPath = posterPath;
+        # this.year = year;
+        # this.genres = genres;
+        # this.streamingServices = streamingServices;
+        # this.cast_members = cast_members;
