@@ -13,19 +13,19 @@ public class Watchlist {
     @Id
     private String id;
     private String type;
-    private List<String> watchables;
+    private List<Watchable> watchables;
     private String userId;
 
 
     @PersistenceConstructor
-    public Watchlist(String id, String type, List<String> watchables, String userId) {
+    public Watchlist(String id, String type, List<Watchable> watchables, String userId) {
         this.id = id;
         this.type = type;
         this.watchables = watchables;
         this.userId = userId;
     }
 
-    public Watchlist(String type, List<String> watchables, String userId) {
+    public Watchlist(String type, List<Watchable> watchables, String userId) {
         this.type = type;
         this.watchables = watchables;
         this.userId = userId;
@@ -47,11 +47,11 @@ public class Watchlist {
         this.type = type;
     }
 
-    public List<String> getWatchables() {
+    public List<Watchable> getWatchables() {
         return watchables;
     }
 
-    public void setWatchables(List<String> watchables) {
+    public void setWatchables(List<Watchable> watchables) {
         this.watchables = watchables;
     }
 
