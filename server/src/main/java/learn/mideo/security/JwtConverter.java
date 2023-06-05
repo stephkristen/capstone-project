@@ -34,6 +34,7 @@ public class JwtConverter {
                 .setSubject(user.getUsername())
                 .claim("id", user.getId())
                 .claim("authorities", authorities)
+                .claim("firstName", user.getFirstName())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_MILLIS))
                 .signWith(key)
                 .compact();
