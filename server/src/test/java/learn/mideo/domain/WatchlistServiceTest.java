@@ -81,8 +81,6 @@ class WatchlistServiceTest {
 ////        assertEquals(ragcrix.getId(), found.getId());
 //    }
 //
-//    @Test
-//    void findAll() {
-//    }
+
 
 }
