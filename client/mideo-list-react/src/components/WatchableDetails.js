@@ -1,21 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom"
 import API_KEY from "./config";
 import YouTube from 'react-youtube';
-import Modal from "react-modal";
-import AddModal from "./AddModal";
 
 function WatchableDetails() {
     const [watchable, setWatchable] = useState(null);
-    const [modalOpen, setModalOpen] = useState(false);
     const { imdbId } = useParams();
+    const navigate = useNavigate();
 
-    const openModal = () => {
-        setModalOpen(true);
-    };
-
-    const closeModal= () => {
-        setModalOpen(false);
+    const handleAddClick = () => {
+        navigate('/watchableform');
     };
 
     async function getDetails() {
@@ -86,18 +81,10 @@ function WatchableDetails() {
                             </p>
                             </td>
                             <td>
-                                <button className="btn btn-secondary" onClick={openModal}>
+                                <button className="btn btn-secondary" onClick={handleAddClick}>
                                     Add
                                 </button>
                             </td>
-
-                            <Modal
-                                isOpen={modalOpen}
-                                onRequestClose={closeModal}
-                                contentLabel="Add Modal"
-                            >
-                                <AddModal closeModal={closeModal} watchable={watchable} />
-                            </Modal>
                         </tr>
                         <tr>
                             <h6 className="white-text">Synopsis:</h6>

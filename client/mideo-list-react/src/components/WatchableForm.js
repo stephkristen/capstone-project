@@ -1,24 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"
 
-const ratings = {
-    1: 'Appalling',
-    2: 'Horrible',
-    3: 'Very Bad',
-    4: 'Bad',
-    5: 'Average',
-    6: 'Fine',
-    7: 'Good',
-    8: 'Very Good',
-    9: 'Great',
-    10: 'Masterpiece',
-  };
-
-function AddModal({ closeModal, watchable }) {
+function WatchableForm({ watchable }) {
     const [selectedList, setSelectedList] = useState('');
     const [selectedRating, setSelectedRating] = useState('');
+    const navigate = useNavigate();
 
 	const handleCancel = () => {
-        closeModal();
+        navigate("/");
     };
 
     const handleListChange = (event) => {
@@ -35,11 +24,11 @@ function AddModal({ closeModal, watchable }) {
         console.log('Selected List: ', selectedList);
         console.log('Selected Rating: ', selectedRating);
 
-        closeModal();
+        // navigate("/watchlist");
     };
 
     return (
-        <div>
+        <div className="white-text container">
             <h2>Add</h2>
             <form onSubmit={handleSubmit}>
                 <div>
@@ -54,14 +43,15 @@ function AddModal({ closeModal, watchable }) {
 
                 <div>
                     <label htmlFor="watchableRating">Rating: </label>
-                    <select id="watchableRating" value={selectedRating} onChange={handleRatingChange}>
-                        <option value="">Select a rating</option>
-                        {Object.entries(ratings).map(([value, label]) => (
-                        <option key={value} value={value}>
-                            {`${value}: ${label}`}
-                        </option>
-                        ))}
-                    </select>
+                    <input
+                        type="number"
+                        id="watchableRating"
+                        min={1}
+                        max={100}
+                        step={1}
+                        value={selectedRating}
+                        onChange={handleRatingChange}
+                    />
                 </div>
 
                 <div className="button-container">
@@ -77,4 +67,4 @@ function AddModal({ closeModal, watchable }) {
     );
 }
 
-export default AddModal;
+export default WatchableForm;
