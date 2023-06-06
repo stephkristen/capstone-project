@@ -38,7 +38,7 @@ public class WatchableController {
 
     @PutMapping(value = "/updatePersonalRating/{id}")
     public ResponseEntity<?> updateWatchablePersonalRating(@PathVariable String id, @RequestBody Watchable watchable) {
-        if (id.equals(watchable.getId())) {
+        if (!id.equals(watchable.getId())) {
             return  new ResponseEntity<>(HttpStatus.CONFLICT);
         }
 

@@ -103,7 +103,7 @@ public class WatchlistRepositoryTest {
         assertThat(watchlists).isNotEmpty();
         assertThat(watchlists).extracting("userId").allMatch(id -> Objects.equals(id, userId));
         assertThat(watchlists).extracting("type").allMatch(type -> Objects.equals(type, type));
-        assertThat(watchlists).
+//        assertThat(watchlists).
 //        assertThat(resultsPage).extracting("created").isSortedAccordingTo(Collections.reverseOrder());
 //        assertThat(resultsPage).extracting("created").first().matches(createdTimeStamp -> (Long)createdTimeStamp <= now);
 //        assertThat(resultsPage).extracting("success").allMatch(sucessfull -> (Boolean)sucessfull == true);
