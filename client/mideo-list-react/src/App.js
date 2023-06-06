@@ -9,7 +9,7 @@ import {
 import { useState, useEffect } from "react";
 import AuthContext from "./contexts/AuthContext";
 
-import AddModal from "./components/AddModal";
+import WatchableForm from "./components/WatchableForm"
 import FormErrors from "./components/FormErrors";
 import NavBar from "./components/NavBar";
 import Home from "./components/Home";
@@ -61,6 +61,8 @@ function App() {
               <Route path="/error" element={<Error></Error>}></Route>
               <Route path="/login" element={!user ? <Login /> : <Navigate to="/" replace={true} />}/>
               <Route path="/signup" element={<SignUp />} />
+              {/* TODO: Change this path from watchable form to /add and /update */}
+              <Route path="/watchableform" element={<WatchableForm />} />
             </Routes>
           </main>
         </div>
