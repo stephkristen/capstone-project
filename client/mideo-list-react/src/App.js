@@ -24,14 +24,26 @@ import WatchableDetails from "./components/WatchableDetails";
 import Watchlist from "./components/Watchlist";
 import './index.css';
 import './App.scss';
-// import { refresh } from './services/auth';
+
+import { refresh } from './services/auth';
 
 function App() {
   const [user, setUser] = useState(null);
   const login = setUser;
 
+  function logout() {
+    setUser(null);
+    localStorage.removeItem('jwt');
+  }
+
+  useEffect(() => {
+    refresh()
+      .then(setUser)
+      .catch(() => logout());
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user, login }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       <Router>
         <div>
           <header className="mb-3">

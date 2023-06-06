@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document(collection="watchables")
+@Document(collection="watchable")
 public class Watchable {
 
     @Id

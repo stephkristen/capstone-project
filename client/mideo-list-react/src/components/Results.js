@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import ResultList from "./ResultList"
 import API_KEY from "./config";
-import { Link } from "react-router-dom";
 
 function Results() {
     const [watchables, setWatchables] = useState([]);

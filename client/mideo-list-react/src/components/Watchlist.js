@@ -45,6 +45,7 @@ function Watchlist() {
       </div>
       <div className="mt-4">
         <select className="form-select" value={list} onChange={handleOnChange}>
+          <option>Select your list to view</option>
           <option value="Completed Movies">Completed Movies</option>
           <option value="Completed Series">Completed Series</option>
           <option value="Plan to Watch">Plan to Watch</option>
