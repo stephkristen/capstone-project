@@ -113,7 +113,7 @@ public class WatchlistRepositoryTest {
         Watchlist watchlist =  watchlistRepository.findByType(userId, watchlistType);
 
         assertThat(watchlist).extracting("userId").matches(id -> Objects.equals(id, userId));
-        assertThat(watchlist).extracting("type").matches(type -> Objects.equals(type, type));
+        assertThat(watchlist).extracting("type").matches(type -> Objects.equals(type, watchlistType));
     }
 
     @AfterAll
