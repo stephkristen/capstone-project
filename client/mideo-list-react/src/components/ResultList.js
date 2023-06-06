@@ -1,18 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import Modal from "react-modal";
-import AddModal from "./AddModal";
+import { Link, useNavigate } from "react-router-dom";
 
 function ResultList({ watchable, index }) {
     const imdbId = watchable.imdbId;
-    const [modalOpen, setModalOpen] = useState(false);
+    const navigate = useNavigate();
 
-    const openModal = () => {
-        setModalOpen(true);
-    };
-
-    const closeModal= () => {
-        setModalOpen(false);
+    const handleAddClick = () => {
+        navigate('/watchableform')
     };
     
     return (
@@ -36,18 +30,10 @@ function ResultList({ watchable, index }) {
                 <p>{watchable.overview}</p>
             </td>
             <td>
-                <button className="btn btn-secondary" onClick={openModal}>
+                <button className="btn btn-secondary" onClick={handleAddClick}>
                     Add
                 </button>
             </td>
-
-            <Modal
-                isOpen={modalOpen}
-                onRequestClose={closeModal}
-                contentLabel="Add Modal"
-            >
-                <AddModal closeModal={closeModal} watchable={watchable} />
-            </Modal>
         </tr>
     );
 }
