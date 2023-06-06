@@ -27,7 +27,6 @@ public class Watchable {
 
     @PersistenceConstructor
     public Watchable() {
-
     }
 
     public Watchable(String id, String type, String title, String overview, int imdbRating, int personalRating, String trailerLink, String posterPath, int year, List<String> genres, List<String> streamingServices, List<String> cast_members) {

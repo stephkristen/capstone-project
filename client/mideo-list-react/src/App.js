@@ -21,7 +21,6 @@ import SignUp from "./components/SignUp";
 import Search from "./components/Search";
 import Watchables from "./components/Watchables";
 import WatchableDetails from "./components/WatchableDetails";
-import WatchableTable from "./components/WatchableTable";
 import Watchlist from "./components/Watchlist";
 import './index.css';
 import './App.scss';

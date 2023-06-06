@@ -1,60 +1,62 @@
 import { useContext, useState, useEffect } from "react";
 import AuthContext from "../contexts/AuthContext";
-import Watchables from "./Watchables";
 import { useNavigate } from "react-router-dom";
-import { findAll } from '../services/watchlist';
-import WatchableTable from "./WatchableTable";
+
+import CompletedMoviesTable from "./CompletedMoviesTable";
+import PlanToWatchTable from "./PlanToWatchTable";
+import CompletedSeriesTable from "./CompletedSeriesTable";
 
 function Watchlist() {
+  const [list, setList] = useState("");
   const { user } = useContext(AuthContext);
-  const [watchlists, setWatchlists] = useState([]);
-//   const [view, setView] = useState('Table');
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
-useEffect(() => {
-    findAll()
-        .then(setWatchlists)
-        .catch(() => navigate('/error'));
-}, []);
+  const [CompletedMoviesVisible, setCompletedMoviesVisible] = useState(false);
+  const [CompletedSeriesVisible, setCompletedSeriesVisible] = useState(false);
+  const [PlanToWatchVisible, setPlanToWatchVisible] = useState(false);
+
+  useEffect(() => {
+    list === "Completed Movies"
+      ? setCompletedMoviesVisible(true)
+      : setCompletedMoviesVisible(false);
+    list === "Completed Series"
+      ? setCompletedSeriesVisible(true)
+      : setCompletedSeriesVisible(false);
+    list === "Plan to Watch"
+      ? setPlanToWatchVisible(true)
+      : setPlanToWatchVisible(false);
+  }, [list]);
+
+  const handleOnChange = (e) => {
+    setList(e.target.value);
+  };
 
   return (
     <div className="container p-5">
       {user && (
         <>
-          <h1 className="p-4" style={{ textAlign: "center" }}>
+          <h1 className="p-4" style={{ textAlign: "center", color: "white"  }}>
             Welcome, {user.firstName}!
           </h1>
         </>
       )}
       <div>
-        <h2>Your Lists</h2>
+        <h2 style={{ color: "white" }}>Your Lists</h2>
       </div>
-      <div className="dropdown">
-        <button
-          className="btn btn-secondary dropdown-toggle"
-          type="button"
-          id="dropdownMenu2"
-          data-bs-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          Choose list
-        </button>
-        <div className="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <button className="dropdown-item" type="button">
-            Completed Movies
-          </button>
-          <button className="dropdown-item" type="button">
-            Completed Series
-          </button>
-          <button className="dropdown-item" type="button">
-            Plan to Watch
-          </button>
-        </div>
+      <div className="mt-4">
+        <select className="form-select" value={list} onChange={handleOnChange}>
+          <option>Select your list to view</option>
+          <option value="Completed Movies">Completed Movies</option>
+          <option value="Completed Series">Completed Series</option>
+          <option value="Plan to Watch">Plan to Watch</option>
+        </select>
       </div>
       <div>
-      <WatchableTable watchlists={watchlists}></WatchableTable>) 
+        <button className='btn btn-info'>Find a Movie to Add to List</button>
       </div>
+      {CompletedMoviesVisible && <CompletedMoviesTable />}
+      {CompletedSeriesVisible && <CompletedSeriesTable />}
+      {PlanToWatchVisible && <PlanToWatchTable />}
     </div>
   );
 }

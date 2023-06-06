@@ -63,7 +63,7 @@ function NavBar() {
 					</ul>
 					{user && (
 						<>
-							<span className='navbar-text mx-2'>Hello, {user.sub}!</span>
+							<span className='navbar-text mx-2'>Hello, {user.firstName}!</span>
 							<button className='btn btn-dark' onClick={handleLogout}>
 								Log Out
 							</button>

@@ -14,4 +14,6 @@ public interface WatchlistRepository extends MongoRepository<Watchlist, String> 
             "{'$match':{'userId': ?0, 'type' : ?1}}",
     })
     Watchlist findByType(String userId, String type);
+
+    Watchlist save(Watchlist watchlist);
 }
