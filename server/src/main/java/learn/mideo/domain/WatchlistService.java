@@ -21,14 +21,8 @@ public class WatchlistService {
         return repository.findAll();
     }
 
-    public List <Watchlist> findByUserId(String userId) {
-        Optional< Watchlist > watchlist = this.repository.findById(userId);
-
-        if (watchlist.isPresent()) {
-            return watchlist.stream().collect(Collectors.toList());
-        } else {
-            throw new ResourceNotFoundException("Watchlist not found with id : " + userId);
-        }
+    public List<Watchlist> findByUserId(String userId) {
+        return repository.findByUserId(userId);
     }
 
     public Watchlist findByType(String userId, String type) {
