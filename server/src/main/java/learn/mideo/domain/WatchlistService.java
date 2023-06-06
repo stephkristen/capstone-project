@@ -2,6 +2,7 @@ package learn.mideo.domain;
 
 import learn.mideo.data.WatchlistRepository;
 import learn.mideo.exception.ResourceNotFoundException;
+import learn.mideo.model.Watchable;
 import learn.mideo.model.Watchlist;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,18 @@ public class WatchlistService {
 
     public Watchlist findByType(String userId, String type) {
         return repository.findByType(userId, type);
+    }
+
+    public void addWatchableToWatchlist(String watchlistId, Watchable watchable) {
+        Optional<Watchlist> optionalWatchlist = repository.findById(watchlistId);
+
+        if (optionalWatchlist.isPresent()) {
+            Watchlist watchlist = optionalWatchlist.get();
+            watchlist.getWatchables().add(watchable);
+            repository.save(watchlist);
+        } else {
+            throw new ResourceNotFoundException("Watchlist not found with id: " + watchlistId);
+        }
     }
 
 }

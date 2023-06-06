@@ -1,6 +1,7 @@
 package learn.mideo.controller;
 
 import learn.mideo.domain.WatchlistService;
+import learn.mideo.model.Watchable;
 import learn.mideo.model.Watchlist;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,13 @@ public class WatchlistController {
     public ResponseEntity<Watchlist> getWatchlistByType(@PathVariable("userId") String userId, @PathVariable("type") String type) {
         return ResponseEntity.ok().body(service.findByType(userId, type));
     }
+
+    @PostMapping("/{watchlistId}/addWatchable")
+    public ResponseEntity<?> addWatchableToWatchlist(@PathVariable("watchlistId") String watchlistId, @RequestBody Watchable watchable) {
+        service.addWatchableToWatchlist(watchlistId, watchable);
+        return ResponseEntity.ok("Watchable added to watchlist successfully");
+    }
+
 //
 //    @PostMapping(value = "/save")
 //    public ResponseEntity<?> save(@RequestBody WatchlistDTO watchlistDTO) {
