@@ -2,6 +2,7 @@ package learn.mideo.controller;
 
 import learn.mideo.domain.WatchlistService;
 import learn.mideo.model.Watchlist;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,17 +21,32 @@ public class WatchlistController {
 
     @GetMapping
     public ResponseEntity< List < Watchlist >> findAll() {
-        return ResponseEntity.ok().body(service.findAll());
+        List<Watchlist> watchlists = service.findAll();
+
+        if (watchlists == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(watchlists, HttpStatus.OK);
     }
 
     @GetMapping(value = "/byUserId/{userId}")
     public ResponseEntity< List <Watchlist> > getWatchlistByUserId(@PathVariable("userId") String userId) {
-        return ResponseEntity.ok().body(service.findByUserId(userId));
+        List<Watchlist> watchlists = service.findByUserId(userId);
+
+        if (watchlists == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(watchlists, HttpStatus.OK);
     }
 
     @GetMapping(value = "/byType/{userId}/{type}")
     public ResponseEntity<Watchlist> getWatchlistByType(@PathVariable("userId") String userId, @PathVariable("type") String type) {
-        return ResponseEntity.ok().body(service.findByType(userId, type));
+        Watchlist watchlist = service.findByType(userId, type);
+
+        if (watchlist == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(watchlist, HttpStatus.OK);
     }
 //
 //    @PostMapping(value = "/save")
