@@ -11,13 +11,9 @@ import de.flapdoodle.embed.mongo.distribution.Version;
 import de.flapdoodle.embed.process.runtime.Network;
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
+import learn.mideo.model.Watchable;
 import learn.mideo.model.Watchlist;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -58,43 +54,65 @@ public class WatchlistRepositoryTest {
         configureAndStartEmbbededMongo();
     }
 
-
     @BeforeEach
     public void dataSetup() {
 
-        Watchlist watchlist;
+        String id = UUID.randomUUID().toString();
+        List<Watchable> movieWatchables = new ArrayList<>();
+        List<Watchable> seriesWatchables = new ArrayList<>();
 
-//        for (int i = 0; i < 10; i++) {
-//            String requestId = UUID.randomUUID().toString();
-//            if (i % 2 == 0) {
-//                watchlist = new Watchlist(requestId, true, USER_ID_LIST.get(RANDOM.nextInt(2)), System.currentTimeMillis());
-//            } else {
-//                watchlist = new Watchlist(requestId, false, USER_ID_LIST.get(RANDOM.nextInt(2)), System.currentTimeMillis());
-//            }
-//
-//            watchlistRepository.save(transaction);
-//        }
+        Watchable watchable = new Watchable();
+        watchable.setTitle("Interstellar");
+        watchable.setType("movie");
+        watchable.setYear(2016);
+
+        Watchable watchable1 = new Watchable();
+        watchable1.setTitle("The Office");
+        watchable1.setType("series");
+        watchable1.setYear(2005);
+
+        Watchable watchable2 = new Watchable();
+        watchable2.setTitle("New Girl");
+        watchable2.setType("series");
+        watchable2.setYear(2007);
+
+        Watchable watchable3 = new Watchable();
+        watchable3.setTitle("Gravity");
+        watchable3.setType("movie");
+        watchable3.setYear(2017);
+
+        movieWatchables.add(watchable);
+        seriesWatchables.add(watchable1);
+        seriesWatchables.add(watchable2);
+        movieWatchables.add(watchable3);
+
+        Watchlist completedMovies = new Watchlist("Completed Movies", movieWatchables, USER_ID_LIST.get(0));
+        Watchlist completedSeries = new Watchlist("Completed Series", seriesWatchables, USER_ID_LIST.get(0));
+
+        watchlistRepository.save(completedMovies);
+        watchlistRepository.save(completedSeries);
 
     }
 
 
     @Test
     public void findWatchlistByUserId() {
-//        long now = System.currentTimeMillis();
-//        String userId = USER_ID_LIST.get(RANDOM.nextInt(2));
-//        List<Watchlist> resultsPage =  watchlistRepository.findBySuccessIsTrueAndCreatedLessThanEqualAndUserIdOrderByCreatedDesc(now, userId, PageRequest.of(0, 5)).getContent();
-//
-//        assertThat(resultsPage).isNotEmpty();
-//        assertThat(resultsPage).extracting("userId").allMatch(id -> Objects.equals(id, userId));
+        String userId = USER_ID_LIST.get(0);
+        List<Watchlist> watchlists =  watchlistRepository.findByUserId(userId);
+
+        assertThat(watchlists).isNotEmpty();
+        assertThat(watchlists).extracting("userId").allMatch(id -> Objects.equals(id, userId));
+        assertThat(watchlists).extracting("type").allMatch(type -> Objects.equals(type, type));
+        assertThat(watchlists).
 //        assertThat(resultsPage).extracting("created").isSortedAccordingTo(Collections.reverseOrder());
 //        assertThat(resultsPage).extracting("created").first().matches(createdTimeStamp -> (Long)createdTimeStamp <= now);
 //        assertThat(resultsPage).extracting("success").allMatch(sucessfull -> (Boolean)sucessfull == true);
     }
 
-    @Test
-    public void findWatchlistByType() {
-
-    }
+//    @Test
+//    public void findWatchlistByType() {
+//
+//    }
 
     @AfterAll
     public static void tearDown() {

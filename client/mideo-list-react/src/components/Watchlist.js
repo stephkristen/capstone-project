@@ -35,13 +35,13 @@ function Watchlist() {
     <div className="container p-5">
       {user && (
         <>
-          <h1 className="p-4" style={{ textAlign: "center" }}>
+          <h1 className="p-4" style={{ textAlign: "center", color: "white"  }}>
             Welcome, {user.firstName}!
           </h1>
         </>
       )}
       <div>
-        <h2>Your Lists</h2>
+        <h2 style={{ color: "white" }}>Your Lists</h2>
       </div>
       <div className="mt-4">
         <select className="form-select" value={list} onChange={handleOnChange}>
@@ -50,6 +50,9 @@ function Watchlist() {
           <option value="Completed Series">Completed Series</option>
           <option value="Plan to Watch">Plan to Watch</option>
         </select>
+      </div>
+      <div>
+        <button className='btn btn-info'>Find a Movie to Add to List</button>
       </div>
       {CompletedMoviesVisible && <CompletedMoviesTable />}
       {CompletedSeriesVisible && <CompletedSeriesTable />}

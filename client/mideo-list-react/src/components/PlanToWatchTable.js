@@ -22,7 +22,7 @@ function PlanToWatchTable() {
       {allWatchables && (
         <>
           <div>
-            <h2 className="mb-4" style={{ textAlign: "center" }}>Plan to Watch List</h2>
+            <h2 className="mb-4" style={{ textAlign: "center", color: "white"  }}>Plan to Watch List</h2>
           </div>
           <table className="table table-striped table-hover table-dark">
             <thead>
@@ -58,6 +58,9 @@ function PlanToWatchTable() {
           </table>
         </>
       )}
+      <div>
+        <button className='btn btn-info'>Find a Movie to Add to List</button>
+      </div>
     </div>
   );
 }

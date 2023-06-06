@@ -22,7 +22,7 @@ function CompletedSeriesTable() {
       {allWatchables && (
         <>
           <div>
-            <h2 className="mb-4" style={{ textAlign: "center" }}>Completed Series List</h2>
+            <h2 className="mb-4" style={{ textAlign: "center", color: "white"  }}>Completed Series List</h2>
           </div>
           <table className="table table-striped table-hover table-dark">
             <thead>

@@ -34,4 +34,5 @@ public class WatchlistService {
     public Watchlist findByType(String userId, String type) {
         return repository.findByType(userId, type);
     }
+
 }
