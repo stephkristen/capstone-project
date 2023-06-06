@@ -32,6 +32,8 @@ public class SecurityConfig {
                  .antMatchers("/authenticate").permitAll()
                  .antMatchers("/create_account").permitAll()
                  .antMatchers("/refresh_token").authenticated()
+                 //TODO Change paths in controller later
+                 // .antMatchers(HttpMethod.GET, "/mideo/**").permitAll()
                  .antMatchers(HttpMethod.GET,
                          "/watchlist").permitAll()
                  .antMatchers(HttpMethod.POST,
@@ -40,6 +42,7 @@ public class SecurityConfig {
                          "/watchlist").hasAnyAuthority("USER", "ADMIN")
                  .antMatchers(HttpMethod.DELETE,
                          "/watchlist").hasAnyAuthority("USER", "ADMIN")
+                 //TODO Change to .denyAll() later
                  .antMatchers("/**").permitAll()
                  .and()
                  .addFilter(new JwtRequestFilter(authenticationManager(authConfig), converter))

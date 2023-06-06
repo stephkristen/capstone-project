@@ -1,0 +1,108 @@
+[{
+  "_id": {
+    "$oid": "647cd44c9f849049b2cb0d6b"
+  },
+  "username": "steph1@gmail.com",
+  "passwordHash": "$2a$10$yACCtgckHW4kkSoujupgxOhVXZLzz.RbTu7T76MOkh.9u8ACiwQ/S",
+  "enabled": true,
+  "role": "USER",
+  "firstName": "Stephanie",
+  "lastName": "Valdez",
+  "_class": "learn.mideo.model.AppUser"
+},
+{
+  "_id": {
+    "$oid": "647cd46d9f849049b2cb0d6d"
+  },
+  "username": "steph2@gmail.com",
+  "passwordHash": "$2a$10$ZbLxSZ07vI8jBTExr7G95uGYusnLlg/hnEjcSiOLCELO7yz90xkqK",
+  "enabled": true,
+  "role": "USER",
+  "firstName": "Stephanie",
+  "lastName": "Valdez",
+  "_class": "learn.mideo.model.AppUser"
+},
+{
+  "_id": {
+    "$oid": "647cd4909f849049b2cb0d6e"
+  },
+  "username": "joe@mail.com",
+  "passwordHash": "$2a$10$VK0PFpHTe74IGoC3l5czROnzsRb4GzUPbEn2SCtMgyC6Yeluudsci",
+  "enabled": true,
+  "role": "USER",
+  "firstName": "Joe",
+  "lastName": "Ford",
+  "_class": "learn.mideo.model.AppUser"
+},
+{
+  "_id": {
+    "$oid": "647cd4a89f849049b2cb0d6f"
+  },
+  "username": "john@smith.com",
+  "passwordHash": "$2a$10$S/gumD1tvP8KmANoGfCeDugxfXYNiUZ4ulgGbPLZmcPiR1f5.EgmC",
+  "enabled": true,
+  "role": "USER",
+  "firstName": "John",
+  "lastName": "Smith",
+  "_class": "learn.mideo.model.AppUser"
+},
+{
+  "_id": {
+    "$oid": "647cd4c79f849049b2cb0d70"
+  },
+  "username": "esin@mail.com",
+  "passwordHash": "$2a$10$jDDTD5f6gIZM6kYNGHxcpuQjYiDuFh6EpJI73cQNxy5m3w1uRdJ4O",
+  "enabled": true,
+  "role": "USER",
+  "firstName": "Esin",
+  "lastName": "Saribudak",
+  "_class": "learn.mideo.model.AppUser"
+},
+{
+  "_id": {
+    "$oid": "647cf7f2818b60470fd933dd"
+  },
+  "username": "steph3@gmail.com",
+  "passwordHash": "$2a$10$B3t22.fDJwkPkNxnBwfZieGksjSq8R9q6C8kOTrVES5OwVDQtbW.q",
+  "enabled": true,
+  "role": "USER",
+  "firstName": "Stephanie",
+  "lastName": "Valdez",
+  "_class": "learn.mideo.model.AppUser"
+},
+{
+  "_id": {
+    "$oid": "647d5114629efd450877e78e"
+  },
+  "username": "steph5@gmail.com",
+  "passwordHash": "$2a$10$yjpw2BJ/WOFH.r9TYLHjYuKEOWMRUg1jQvzefL4SU/H8Ywrbkw4WW",
+  "enabled": true,
+  "role": "USER",
+  "firstName": "Stephanie",
+  "lastName": "Valdez",
+  "_class": "learn.mideo.model.AppUser"
+},
+{
+  "_id": {
+    "$oid": "647df56cbab95e007a8a99d0"
+  },
+  "username": "tess@gmail.com",
+  "passwordHash": "$2a$10$7RqVbMgwGFjonKTY0bln3el96PALf5JDx3TRFcTL5MmXNXKXMIXJW",
+  "enabled": true,
+  "role": "USER",
+  "firstName": "Tess",
+  "lastName": "Roseburrough",
+  "_class": "learn.mideo.model.AppUser"
+},
+{
+  "_id": {
+    "$oid": "647dfb25bab95e007a8a99d2"
+  },
+  "username": "steph8@gmail.com",
+  "passwordHash": "$2a$10$K7y2xVOUFig0iP5D24WFdOxPvx36CclvK6aq6k7Sqn4lVZsE1O85a",
+  "enabled": true,
+  "role": "USER",
+  "firstName": "Stephanie",
+  "lastName": "Valdez",
+  "_class": "learn.mideo.model.AppUser"
+}]
