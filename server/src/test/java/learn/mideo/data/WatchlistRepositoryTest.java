@@ -1,6 +1,7 @@
 package learn.mideo.data;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.mongodb.WriteConcern;
 import de.flapdoodle.embed.mongo.MongodExecutable;
@@ -15,10 +16,7 @@ import java.util.*;
 
 import learn.mideo.model.Watchable;
 import learn.mideo.model.Watchlist;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration;
@@ -43,7 +41,7 @@ public class WatchlistRepositoryTest {
     static MongodExecutable executable;
 
     @Autowired
-    private WatchlistRepository watchlistRepository;
+    WatchlistRepository watchlistRepository;
 
     private final static List<String> USER_ID_LIST = Arrays.asList("b2b1f340-cba2-11e8-ad5d-873445c542a2", "bd5dd3a4-cba2-11e8-9594-3356a2e7ef10");
 
@@ -112,6 +110,7 @@ public class WatchlistRepositoryTest {
         String watchlistType = "Completed Movies";
         Watchlist watchlist =  watchlistRepository.findByType(userId, watchlistType);
 
+//        assertTrue();
         assertThat(watchlist).extracting("userId").matches(id -> Objects.equals(id, userId));
         assertThat(watchlist).extracting("type").matches(type -> Objects.equals(type, watchlistType));
     }
