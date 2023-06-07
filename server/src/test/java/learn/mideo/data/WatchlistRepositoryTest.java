@@ -1,6 +1,7 @@
 package learn.mideo.data;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.mongodb.WriteConcern;
 import de.flapdoodle.embed.mongo.MongodExecutable;
@@ -15,10 +16,7 @@ import java.util.*;
 
 import learn.mideo.model.Watchable;
 import learn.mideo.model.Watchlist;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration;
@@ -43,7 +41,7 @@ public class WatchlistRepositoryTest {
     static MongodExecutable executable;
 
     @Autowired
-    private WatchlistRepository watchlistRepository;
+    WatchlistRepository watchlistRepository;
 
     private final static List<String> USER_ID_LIST = Arrays.asList("b2b1f340-cba2-11e8-ad5d-873445c542a2", "bd5dd3a4-cba2-11e8-9594-3356a2e7ef10");
 
@@ -94,7 +92,6 @@ public class WatchlistRepositoryTest {
 
     }
 
-
     @Test
     public void findWatchlistByUserId() {
         String userId = USER_ID_LIST.get(0);
@@ -103,16 +100,20 @@ public class WatchlistRepositoryTest {
         assertThat(watchlists).isNotEmpty();
         assertThat(watchlists).extracting("userId").allMatch(id -> Objects.equals(id, userId));
         assertThat(watchlists).extracting("type").allMatch(type -> Objects.equals(type, type));
-        assertThat(watchlists).
-//        assertThat(resultsPage).extracting("created").isSortedAccordingTo(Collections.reverseOrder());
-//        assertThat(resultsPage).extracting("created").first().matches(createdTimeStamp -> (Long)createdTimeStamp <= now);
-//        assertThat(resultsPage).extracting("success").allMatch(sucessfull -> (Boolean)sucessfull == true);
+        assertThat(watchlists).size().isEqualTo(2);
     }
 
-//    @Test
-//    public void findWatchlistByType() {
-//
-//    }
+
+    @Test
+    public void findWatchlistByType() {
+        String userId = USER_ID_LIST.get(0);
+        String watchlistType = "Completed Movies";
+        Watchlist watchlist =  watchlistRepository.findByType(userId, watchlistType);
+
+//        assertTrue();
+        assertThat(watchlist).extracting("userId").matches(id -> Objects.equals(id, userId));
+        assertThat(watchlist).extracting("type").matches(type -> Objects.equals(type, watchlistType));
+    }
 
     @AfterAll
     public static void tearDown() {
@@ -157,97 +158,3 @@ public class WatchlistRepositoryTest {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//package learn.mideo.data;
-//
-//import de.flapdoodle.embed.mongo.MongodExecutable;
-//import de.flapdoodle.embed.mongo.MongodStarter;
-//import de.flapdoodle.embed.mongo.config.Net;
-//import de.flapdoodle.embed.mongo.distribution.Version;
-//import de.flapdoodle.embed.process.runtime.Network;
-//import org.junit.AfterClass;
-//import org.junit.BeforeClass;
-//import org.junit.jupiter.api.Test;
-//import org.junit.runner.RunWith;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-//import org.springframework.boot.test.context.SpringBootTest;
-//import org.springframework.data.mongodb.core.MongoTemplate;
-//import org.springframework.test.context.junit4.SpringRunner;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
-//class WatchlistRepositoryTest {
-//
-//    static MongodExecutable mongodExecutable;
-//
-//    @BeforeClass
-//    public static void setup() throws Exception {
-//        MongodStarter starter = MongodStarter.getDefaultInstance();
-//        String bindIp = "localhost";
-//        int port = 27019;
-//        IMongodConfig mongodConfig = new MongodConfigBuilder()
-//                .version(Version.Main.PRODUCTION)
-//                .net(new Net(bindIp, port, Network.localhostIsIPv6()))
-//                .build();
-//        mongodExecutable = null;
-//        try {
-//            mongodExecutable = starter.prepare(mongodConfig);
-//            mongodExecutable.start();
-//        } catch (Exception e){
-//            // log exception here
-//            throw new Exception(
-//                    "ERROR in mongo test configuration");
-//            if (mongodExecutable != null)
-//                mongodExecutable.stop();
-//        }
-//    }
-//
-//    @AfterClass
-//    public static void teardown() throws Exception {
-//        if (mongodExecutable != null)
-//            mongodExecutable.stop();
-//    }
-//
-////    @Autowired
-////    private MongoTemplate mongoTemplate;
-//
-//    @Test
-//    void findByUserId() {
-//    }
-//
-//    @Test
-//    void findByType() {
-//    }
-//}

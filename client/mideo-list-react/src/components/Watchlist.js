@@ -31,6 +31,10 @@ function Watchlist() {
     setList(e.target.value);
   };
 
+  const handleFindButton = () => {
+    navigate("/search");
+  };
+
   return (
     <div className="container p-5">
       {user && (
@@ -51,12 +55,16 @@ function Watchlist() {
           <option value="Plan to Watch">Plan to Watch</option>
         </select>
       </div>
-      <div>
-        <button className='btn btn-info'>Find a Movie to Add to List</button>
-      </div>
       {CompletedMoviesVisible && <CompletedMoviesTable />}
       {CompletedSeriesVisible && <CompletedSeriesTable />}
       {PlanToWatchVisible && <PlanToWatchTable />}
+      <div>
+      <div className="py-3" style={{ textAlign: "center" }}>
+        <button className="btn btn-info" onClick={handleFindButton}>
+          Find a Watchable to Add to List
+        </button>
+      </div>
+      </div>
     </div>
   );
 }

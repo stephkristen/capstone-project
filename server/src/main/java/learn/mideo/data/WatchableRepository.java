@@ -2,7 +2,6 @@ package learn.mideo.data;
 
 import learn.mideo.model.Watchable;
 import org.springframework.data.mongodb.repository.MongoRepository;
-
 import java.util.List;
 import java.util.Optional;
 

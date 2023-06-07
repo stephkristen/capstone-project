@@ -27,7 +27,12 @@ public class WatchlistController {
 
     @GetMapping
     public ResponseEntity< List < Watchlist >> findAll() {
-        return ResponseEntity.ok().body(service.findAll());
+        List<Watchlist> watchlists = service.findAll();
+
+        if (watchlists == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(watchlists, HttpStatus.OK);
     }
 
     @GetMapping(value = "/byUserId/{userId}")
@@ -42,7 +47,12 @@ public class WatchlistController {
 
     @GetMapping(value = "/byType/{userId}/{type}")
     public ResponseEntity<Watchlist> getWatchlistByType(@PathVariable("userId") String userId, @PathVariable("type") String type) {
-        return ResponseEntity.ok().body(service.findByType(userId, type));
+        Watchlist watchlist = service.findByType(userId, type);
+
+        if (watchlist == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(watchlist, HttpStatus.OK);
     }
 
     @PostMapping("/{watchlistId}/addWatchable/{watchableId}")
