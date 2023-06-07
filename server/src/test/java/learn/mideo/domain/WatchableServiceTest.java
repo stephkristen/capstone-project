@@ -1,7 +1,5 @@
 package learn.mideo.domain;
 
-import learn.mideo.AppConfig;
-import learn.mideo.data.MongoDBConfig;
 import learn.mideo.data.WatchableRepository;
 import learn.mideo.model.Watchable;
 import org.junit.jupiter.api.Test;
