@@ -16,11 +16,8 @@ public class WatchableService {
 
     private final WatchableRepository repository;
 
-    private final MongoTemplate mongoTemplate;
-
-    public WatchableService(WatchableRepository repository, MongoTemplate mongoTemplate) {
+    public WatchableService(WatchableRepository repository) {
         this.repository = repository;
-        this.mongoTemplate = mongoTemplate;
     }
 
     public Watchable save(Watchable watchable) {
@@ -41,13 +38,13 @@ public class WatchableService {
             return result;
         }
 
-        Watchable savedWatchable = mongoTemplate.findById(watchable.getId(), Watchable.class);
+        Watchable savedWatchable = repository.findWatchableById(watchable.getId(), Watchable.class);
         if (savedWatchable == null) {
             String msg = String.format("Watchable id: %s, not found", watchable.getId());
             result.addMessage(msg, ResultType.NOT_FOUND);
         } else if (result.isSuccess()) {
             savedWatchable.setPersonalRating(watchable.getPersonalRating());
-            mongoTemplate.save(savedWatchable);
+            repository.save(savedWatchable);
         } else {
             result.addMessage("Watchable id %s was not found.", ResultType.NOT_FOUND, watchable.getId());
         }
@@ -73,10 +70,6 @@ public class WatchableService {
             result.addMessage("The personal rating may not be less than %s or greater than or equal to %s.", ResultType.INVALID, MIN_PERSONAL_RATING, MAX_PERSONAL_RATING);
             return result;
         }
-
-        // check for duplicates in a list
-        // create boolean isDuplicate() helper method (inspired by Week09 pets-server)
-        // possibly requires creation for findAllWatchables() method
 
         return result;
     }
