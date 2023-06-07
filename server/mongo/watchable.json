@@ -1,0 +1,115 @@
+[{
+    "type": "movie",
+    "title": "Guardians of the Galaxy Vol. 3",
+    "overview": "Peter Quill, still reeling from the loss of Gamora, must rally his team around him to defend the universe along with protecting one of their own. A mission that, if not completed successfully, could quite possibly lead to the end of the Guardians as we know them.",
+    "year": 2023,
+    "imdbRating": 83,
+    "genres": [
+        "Action",
+        "Adventure"
+    ],
+    "posterPath": "/r2J02Z2OpNTctfOSN1Ydgii51I3.jpg",
+    "cast_members": [
+        "Chris Pratt",
+        "Zoe Saldaña",
+        "Dave Bautista",
+        "Karen Gillan",
+        "Pom Klementieff",
+        "Vin Diesel",
+        "Bradley Cooper"
+    ],
+    "streamingServices": [
+    ],
+    "trailerLink": "https://www.youtube.com/watch?v=AAE5VZktooM",
+    "id": "tt6791350",
+    "personalRating": 92
+    },
+    {
+    "type": "movie",
+    "title": "Pitch Perfect",
+    "overview": "College student Beca knows she does not want to be part of a clique, but that's exactly where she finds herself after arriving at her new school. Thrust in among mean gals, nice gals and just plain weird gals, Beca finds that the only thing they have in common is how well they sing together. She takes the women of the group out of their comfort zone of traditional arrangements and into a world of amazing harmonic combinations in a fight to the top of college music competitions.",
+    "year": 2012,
+    "imdbRating": 71,
+    "genres": [
+        "Comedy",
+        "Music",
+        "Romance"
+    ],
+    "posterPath": "/ntRIoh8Qf1BI1AYGx0STfq0wUmb.jpg",
+    "cast_members": [
+        "Anna Kendrick",
+        "Brittany Snow",
+        "Anna Camp",
+        "Rebel Wilson",
+        "Skylar Astin",
+        "Ester Dean",
+        "Hana Mae Lee"
+    ],
+    "id": "tt1981677",
+    "personalRating": 85,
+    "streamingServices": [
+        "apple",
+        "netflix",
+        "prime"
+    ],
+    "trailerLink": "https://www.youtube.com/watch?v=8dItOM6eYXY"
+    },
+    {
+        "type": "series",
+        "title": "Ted Lasso",
+        "overview": "Ted Lasso, an American football coach, moves to England when he’s hired to manage a soccer team—despite having no experience. With cynical players and a doubtful town, will he get them to see the Ted Lasso Way?",
+        "firstAirYear": 2020,
+        "lastAirYear": 2023,
+        "imdbRating": 88,
+        "genres": [
+            "Comedy",
+            "Drama",
+            "Sport"
+        ],
+        "posterPath": "/5fhZdwP1DVJ0FyVH6vrFdHwpXIn.jpg",
+        "cast_members": [
+            "Jason Sudeikis",
+            "Hannah Waddingham",
+            "Jeremy Swift",
+            "Phil Dunster",
+            "Brett Goldstein",
+            "Brendan Hunt",
+            "Nick Mohammed"
+        ],
+        "id": "tt10986410",
+        "personalRating": 88,
+        "streamingServices": [
+            "apple"
+        ],
+        "trailerLink": "https://www.youtube.com/watch?v=3u7EIiohs6U"
+    },
+    {
+        "type": "series",
+        "title": "Breaking Bad",
+        "overview": "When Walter White, a New Mexico chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of only two years left to live. He becomes filled with a sense of fearlessness and an unrelenting desire to secure his family's financial future at any cost as he enters the dangerous world of drugs and crime.",
+        "firstAirYear": 2008,
+        "lastAirYear": 2013,
+        "imdbRating": 95,
+        "genres": [
+            "Crime",
+            "Drama",
+            "Thriller"
+        ],
+        "posterPath": "/ggFHVNu6YYI5L9pCfOacjizRGt.jpg",
+        "cast_members": [
+            "Bryan Cranston",
+            "Aaron Paul",
+            "Anna Gunn",
+            "Dean Norris",
+            "Betsy Brandt",
+            "RJ Mitte",
+            "Bob Odenkirk"
+        ],
+        "id": "tt0903747",
+        "personalRating": 100,
+        "streamingServices": [
+            "netflix"
+        ],
+        "trailerLink": "https://www.youtube.com/watch?v=XZ8daibM3AE"
+        }
+]
