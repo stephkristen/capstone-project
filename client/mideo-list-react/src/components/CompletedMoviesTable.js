@@ -7,6 +7,7 @@ import { findByUserId, findByType } from "../services/watchlist";
 function CompletedMoviesTable() {
   const { user } = useContext(AuthContext);
   const [watchables, setWatchables] = useState([]);
+  const [watchlist, setWatchlist] = useState([]);
   const navigate = useNavigate();
   const padding = { padding: "15px" };
 
@@ -16,15 +17,9 @@ function CompletedMoviesTable() {
       .catch(() => navigate("/error"));
   }, []);
 
-  const handleFindButton = () => {
-    navigate("/search");
-  };
-
-  //   const handleDelete = () => {
-  //       navigate(`/watchlist/delete/${watchable.id}`);
-  //   }
 
   const allWatchables = watchables.watchables;
+  const watchlistId = watchables.id;
 
   return (
     <div className="p-5">
@@ -78,7 +73,7 @@ function CompletedMoviesTable() {
                     </td>
                     <td>
                       <Link
-                        to={`/watchlist/delete/${watchable.id}`}
+                        to={`/watchlist/delete/${watchlistId}/${watchable.id}`}
                         className="btn btn-danger mx-2"
                       >
                         Delete

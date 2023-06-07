@@ -1,5 +1,6 @@
 package learn.mideo.domain;
 
+import learn.mideo.data.WatchableRepository;
 import learn.mideo.data.WatchlistRepository;
 import learn.mideo.data.WatchlistRepositoryTest;
 import learn.mideo.model.Watchable;
@@ -7,11 +8,13 @@ import learn.mideo.model.Watchlist;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +23,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
+@RunWith(SpringRunner.class)
 @SpringBootTest(classes=WatchlistService.class)
 class WatchlistServiceTest {
 
@@ -28,6 +32,9 @@ class WatchlistServiceTest {
 
     @MockBean
     WatchlistRepository watchlistRepository;
+
+    @MockBean
+    WatchableRepository watchableRepository;
 
     private String userId1 = "abc100";
     private String userId2 = "zyx200";

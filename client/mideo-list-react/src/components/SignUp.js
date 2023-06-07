@@ -39,7 +39,7 @@ function SignUp() {
       <div className="container w-100 py-5">
         <form
           onSubmit={handleSubmit}
-          className="container-fluid py-5"
+          className="container-fluid py-5 rounded-3"
           style={{ backgroundColor: "rgba(140, 191, 248, 0.521)" }}
         >
           <h3>Sign Up</h3>
