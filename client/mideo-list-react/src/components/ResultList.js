@@ -6,7 +6,7 @@ function ResultList({ watchable, index }) {
     const navigate = useNavigate();
 
     const handleAddClick = () => {
-        navigate('/watchableform')
+        navigate(`/details/${imdbId}`);
     };
     
     return (

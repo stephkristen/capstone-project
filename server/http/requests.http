@@ -287,3 +287,52 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJtaWRlbyIsInN1YiI6ImJvYkBqb
     "streamingServices": null,
     "cast_members": null
 }
+
+###
+
+POST http://localhost:8080/watchlist/647f56975d9aa5d43d05ddc8/addWatchable/647fdebe2c841116eea0e320 HTTP/1.1
+Content-Type: application/json
+
+###
+
+DELETE http://localhost:8080/watchlist/647f56975d9aa5d43d05ddc8/removeWatchable/647fdebe2c841116eea0e320 HTTP/1.1
+Content-Type: application/json
+
+###
+
+POST http://localhost:8080/watchable HTTP/1.1
+Content-Type: application/json
+
+{
+  "id": "6480b34dddaafa5a826a01e0",
+  "type": "movie",
+  "title": "Moana",
+  "overview": "In Ancient Polynesia, when a terrible curse incurred by Maui reaches an impetuous Chieftain's daughter's island, she answers the Ocean's call to seek out the demigod to set things right.",
+  "imdbRating": 76,
+  "personalRating": 5,
+  "trailerLink": "https://www.youtube.com/watch?v=LKFuXETZUsI",
+  "posterPath": "/4JeejGugONWpJkbnvL12hVoYEDa.jpg",
+  "year": 2016,
+  "firstAirYear": 0,
+  "lastAirYear": 0,
+  "genres": [
+    "Animation",
+    "Adventure",
+    "Comedy"
+  ],
+  "streamingServices": [
+    "apple",
+    "disney",
+    "prime"
+  ],
+  "cast_members": [
+    "Auli'i Cravalho",
+    "Dwayne Johnson",
+    "Rachel House",
+    "Temuera Morrison",
+    "Jemaine Clement",
+    "Nicole Scherzinger",
+    "Alan Tudyk"
+  ],
+  "_class": "learn.mideo.model.Watchable"
+}
