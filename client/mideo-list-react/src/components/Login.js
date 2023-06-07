@@ -45,17 +45,17 @@ function Login() {
           onSubmit={handleSubmit}
           className="container-fluid p-5 rounded-3"
           style={{ backgroundColor: "rgba(140, 191, 248, 0.521)" }}>
-          <h3>Log In</h3>
+          <h3 className="text-center">Log In</h3>
           {location.state?.msg && (
             <div className="alert alert-success" role="alert">
               {location.state.msg}
             </div>
           )}
           <div className="mb-3 row">
-            <label htmlFor="username" className="col-form-label">
+            <label htmlFor="username" className="col-sm-3 col-form-label">
               Username
             </label>
-            <div className="col-sm-8">
+            <div className="col-sm-9">
               <input
                 type="text"
                 id="username"
@@ -68,10 +68,10 @@ function Login() {
             </div>
           </div>
           <div className="mb-3 row">
-            <label htmlFor="password" className="form-label">
+            <label htmlFor="password" className="col-sm-3 col-form-label">
               Password
             </label>
-            <div className="col-sm-8">
+            <div className="col-sm-9">
               <input
                 type="password"
                 id="password"
@@ -83,17 +83,17 @@ function Login() {
               ></input>
             </div>
           </div>
-          <div className="py-2">
-            <button className="btn btn-primary" type="submit">
+          <div className="py-2 d-flex justify-content-end">
+            <button className="btn btn-primary shadow-sm" type="submit">
               Login
             </button>
-            <Link className="btn btn-secondary mx-3" to="/">
+            <Link className="btn btn-secondary mx-3 shadow-sm" to="/">
               Cancel
             </Link>
           </div>
-          <div className="py-2">
-            <p>
-              No Account? Click <Link to="/signup">here</Link> to sign up!
+          <div className="py-2 d-flex justify-content-end">
+            <p id="sign-up-prompt">
+              No Account? Click <Link to="/signup" id="here">here</Link> to sign up!
             </p>
           </div>
           {error && (
