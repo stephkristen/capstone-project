@@ -9,7 +9,7 @@ import java.util.List;
 @Document(collection="watchable")
 public class Watchable {
 
-    @Id
+//    @Id
     private String id;
     private String type;
     private String title;

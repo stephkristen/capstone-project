@@ -26,6 +26,7 @@ import './index.css';
 import './App.scss';
 
 import { refresh } from './services/auth';
+import DeleteConfirmation from "./components/DeleteConfirmation";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -62,6 +63,7 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               {/* TODO: Change this path from watchable form to /add and /update */}
               <Route path="/watchableform" element={<WatchableForm />} />
+              <Route path="/watchlist/delete/:watchableid" element={<DeleteConfirmation />} />
             </Routes>
           </main>
         </div>
