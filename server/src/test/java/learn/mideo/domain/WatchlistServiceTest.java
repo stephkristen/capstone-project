@@ -72,6 +72,11 @@ class WatchlistServiceTest {
         assertEquals(user1watchlists, found);
     }
 
+    @Test
+    public void shouldNotFindUserByNonExistentId() {
+
+    }
+
 //    @Test
 //    public void findByType_thenCompletedMoviesShouldBeReturned() {
 ////        Student found = studentService.findByStudentNumber(ragcrixStudentNumber);
@@ -81,6 +86,19 @@ class WatchlistServiceTest {
 ////        assertEquals(ragcrix.getId(), found.getId());
 //    }
 //
+
+    @Test
+    public void shouldFindListOfEachType() {
+        //movies
+        Watchlist completedMoviesWatchlist = watchlistService.findByType(userId1,"Completed Movies");
+        assertEquals("Completed Movies", completedMoviesWatchlist.getType());
+
+        //series
+        Watchlist completedSeriesWatchlist = watchlistService.findByType(userId1,"Completed Series");
+        assertEquals("Completed Movies", completedSeriesWatchlist.getType());
+
+        //plan-to-watch
+    }
 
 
 }

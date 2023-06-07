@@ -7,6 +7,4 @@ import org.springframework.data.repository.query.Param;
 
 public interface WatchableRepository extends MongoRepository<Watchable, String> {
 
-    // @Query
-//    boolean updateWatchablePersonalRating(@Param("id") String id, @Param("personalRating") int personalRating);
 }

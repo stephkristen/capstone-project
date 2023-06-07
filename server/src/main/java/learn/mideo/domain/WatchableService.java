@@ -27,23 +27,6 @@ public class WatchableService {
         return repository.findById(id);
     }
 
-//    public Result<Watchable> updatePersonalRating(Watchable watchable) {
-//        Result<Watchable> result = validate(watchable);
-//        if (watchable.getId().isEmpty()) {
-//            return result;
-//        }
-//
-//        if (!result.isSuccess()) {
-//            return result;
-//        }
-//
-//        if (!repository.save(watchable)) {
-//            String msg = String.format("Watchable id: %s, not found", watchable.getId());
-//            result.addMessage(msg, ResultType.NOT_FOUND);
-//        }
-//        return result;
-//    }
-
     public Result<Watchable> updatePersonalRating(Watchable watchable) {
         Result<Watchable> result = validate(watchable);
         if (!result.isSuccess()) {
@@ -51,7 +34,6 @@ public class WatchableService {
         }
 
         Watchable savedWatchable = mongoTemplate.findById(watchable.getId(), Watchable.class);
-//        Watchable savedWatchable = repository.findById(watchable.getId());
         if (savedWatchable == null) {
             String msg = String.format("Watchable id: %s, not found", watchable.getId());
             result.addMessage(msg, ResultType.NOT_FOUND);
@@ -80,5 +62,4 @@ public class WatchableService {
 
         return result;
     }
-
 }
