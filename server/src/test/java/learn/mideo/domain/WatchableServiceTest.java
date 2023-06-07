@@ -67,8 +67,6 @@ class WatchableServiceTest {
         assertFalse(watchableResult1.isSuccess());
         assertEquals(1, watchableResult1.getMessages().size());
         assertTrue(watchableResult1.getMessages().get(0).contains("The personal rating may not be less than 0 or greater than or equal to 100."));
-//        System.out.println(watchableMovie1.getPersonalRating());
-//        assertTrue(watchableMovie1.getPersonalRating() <= 100);
 
         Watchable watchableSeries1 = makeWatchableSeries();
         watchableSeries1.setPersonalRating(101);
@@ -76,7 +74,6 @@ class WatchableServiceTest {
         assertFalse(watchableResult2.isSuccess());
         assertEquals(1, watchableResult2.getMessages().size());
         assertTrue(watchableResult2.getMessages().get(0).contains("The personal rating may not be less than 0 or greater than or equal to 100."));
-//        assertTrue(watchableSeries1.getPersonalRating() <= 100);
 
         Watchable watchableMovie2 = makeWatchableMovie();
         watchableMovie2.setPersonalRating(-1);
@@ -84,7 +81,6 @@ class WatchableServiceTest {
         assertFalse(watchableResult3.isSuccess());
         assertEquals(1, watchableResult3.getMessages().size());
         assertTrue(watchableResult3.getMessages().get(0).contains("The personal rating may not be less than 0 or greater than or equal to 100."));
-//        assertTrue(watchableMovie2.getPersonalRating() >= 0);
 
         Watchable watchableSeries2 = makeWatchableSeries();
         watchableSeries2.setPersonalRating(-1);
@@ -92,7 +88,6 @@ class WatchableServiceTest {
         assertFalse(watchableResult4.isSuccess());
         assertEquals(1, watchableResult4.getMessages().size());
         assertTrue(watchableResult4.getMessages().get(0).contains("The personal rating may not be less than 0 or greater than or equal to 100."));
-//        assertTrue(watchableSeries2.getPersonalRating() >= 0);
     }
 
     private Watchable makeWatchableMovie() {
@@ -132,4 +127,5 @@ class WatchableServiceTest {
         watchable.setCast_members(null);
         return watchable;
     }
+
 }

@@ -15,5 +15,4 @@ public interface WatchlistRepository extends MongoRepository<Watchlist, String> 
     })
     Watchlist findByType(String userId, String type);
 
-    Watchlist save(Watchlist watchlist);
 }

@@ -78,7 +78,7 @@ function WatchableDetails() {
                             <p>IMDb Rating: {watchable.imdbRating}/100</p>
                             <p>
                                 Streaming On: {''}
-                                {watchable.streamingInfo && Object.keys(watchable.streamingInfo).join(', ')}
+                                {watchable.streamingInfo.us && Object.keys(watchable.streamingInfo.us).join(', ')}
                             </p>
                             </td>
                             <td>
