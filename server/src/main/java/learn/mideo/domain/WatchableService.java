@@ -10,6 +10,10 @@ import java.util.Optional;
 @Service
 public class WatchableService {
 
+    public final static int MAX_PERSONAL_RATING = 100;
+
+    public final static int MIN_PERSONAL_RATING = 0;
+
     private final WatchableRepository repository;
 
     private final MongoTemplate mongoTemplate;
@@ -37,9 +41,11 @@ public class WatchableService {
         if (savedWatchable == null) {
             String msg = String.format("Watchable id: %s, not found", watchable.getId());
             result.addMessage(msg, ResultType.NOT_FOUND);
-        } else {
+        } else if (result.isSuccess()) {
             savedWatchable.setPersonalRating(watchable.getPersonalRating());
             mongoTemplate.save(savedWatchable);
+        } else {
+            result.addMessage("Watchable id %s was not found.", ResultType.NOT_FOUND, watchable.getId());
         }
         return result;
     }
@@ -51,8 +57,12 @@ public class WatchableService {
             return result;
         }
 
-        if (watchable.getPersonalRating() < 0 ||watchable.getPersonalRating() > 100) {
-            result.addMessage("The personal rating may not be less than 0 or greater than 100.", ResultType.INVALID);
+        if (watchable.getId() == null) {
+            result.addMessage("Watchable id is null.", ResultType.INVALID);
+        }
+
+        if (watchable.getPersonalRating() < MIN_PERSONAL_RATING || watchable.getPersonalRating() > MAX_PERSONAL_RATING) {
+            result.addMessage("The personal rating may not be less than %s or greater than or equal to %s.", ResultType.INVALID, MIN_PERSONAL_RATING, MAX_PERSONAL_RATING);
             return result;
         }
 

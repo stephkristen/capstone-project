@@ -38,8 +38,8 @@ public class Result<T> {
         return new ArrayList<>(messages);
     }
 
-    public void addMessage(String message, ResultType type) {
-        messages.add(message);
+    public void addMessage(String format, ResultType type, Object... args) {
+        messages.add(String.format(format, args));
         this.type = type;
     }
 

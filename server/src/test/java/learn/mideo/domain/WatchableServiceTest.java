@@ -10,18 +10,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
-@ContextConfiguration(classes = {AppConfig.class, MongoDBConfig.class})
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes=WatchableService.class)
 class WatchableServiceTest {
 
     @Autowired
@@ -50,7 +47,6 @@ class WatchableServiceTest {
     void shouldNotFindWatchableByNonExistentId() {
         Optional<Watchable> watchable = service.findWatchableById("zzz0000000");
         assertTrue(watchable.isEmpty());
-        assertNull(watchable.get());
     }
 
     @Test
@@ -66,23 +62,39 @@ class WatchableServiceTest {
 
     @Test
     void shouldNotUpdateInvalidPersonalRating() {
-        // above 100
-        // below 0
+        // any rating outside the range: 0-100
         Watchable watchableMovie1 = makeWatchableMovie();
-        watchableMovie1.setPersonalRating(105);
-        assertTrue(watchableMovie1.getPersonalRating() < 100);
+        watchableMovie1.setPersonalRating(101);
+        Result<Watchable> watchableResult1 = service.updatePersonalRating(watchableMovie1);
+        assertFalse(watchableResult1.isSuccess());
+        assertEquals(1, watchableResult1.getMessages().size());
+        assertTrue(watchableResult1.getMessages().get(0).contains("The personal rating may not be less than 0 or greater than or equal to 100."));
+//        System.out.println(watchableMovie1.getPersonalRating());
+//        assertTrue(watchableMovie1.getPersonalRating() <= 100);
 
         Watchable watchableSeries1 = makeWatchableSeries();
-        watchableSeries1.setPersonalRating(200);
-        assertTrue(watchableSeries1.getPersonalRating() < 100);
+        watchableSeries1.setPersonalRating(101);
+        Result<Watchable> watchableResult2 = service.updatePersonalRating(watchableMovie1);
+        assertFalse(watchableResult2.isSuccess());
+        assertEquals(1, watchableResult2.getMessages().size());
+        assertTrue(watchableResult2.getMessages().get(0).contains("The personal rating may not be less than 0 or greater than or equal to 100."));
+//        assertTrue(watchableSeries1.getPersonalRating() <= 100);
 
         Watchable watchableMovie2 = makeWatchableMovie();
-        watchableMovie2.setPersonalRating(105);
-        assertTrue(watchableMovie2.getPersonalRating() > 0);
+        watchableMovie2.setPersonalRating(-1);
+        Result<Watchable> watchableResult3 = service.updatePersonalRating(watchableMovie1);
+        assertFalse(watchableResult3.isSuccess());
+        assertEquals(1, watchableResult3.getMessages().size());
+        assertTrue(watchableResult3.getMessages().get(0).contains("The personal rating may not be less than 0 or greater than or equal to 100."));
+//        assertTrue(watchableMovie2.getPersonalRating() >= 0);
 
         Watchable watchableSeries2 = makeWatchableSeries();
-        watchableSeries2.setPersonalRating(200);
-        assertTrue(watchableSeries2.getPersonalRating() > 0);
+        watchableSeries2.setPersonalRating(-1);
+        Result<Watchable> watchableResult4 = service.updatePersonalRating(watchableMovie1);
+        assertFalse(watchableResult4.isSuccess());
+        assertEquals(1, watchableResult4.getMessages().size());
+        assertTrue(watchableResult4.getMessages().get(0).contains("The personal rating may not be less than 0 or greater than or equal to 100."));
+//        assertTrue(watchableSeries2.getPersonalRating() >= 0);
     }
 
     private Watchable makeWatchableMovie() {
