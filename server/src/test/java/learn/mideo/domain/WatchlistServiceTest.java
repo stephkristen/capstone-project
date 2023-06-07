@@ -86,7 +86,7 @@ class WatchlistServiceTest {
     void shouldFindByType_thenCompletedMoviesShouldBeReturned() {
         Watchlist actual = watchlistService.findByType(userId1, "Completed Movies");
 
-        assertNotNull(actual);
+//        assertNotNull(actual);
         assertEquals(actual.getUserId(), userId1);
         assertEquals(actual.getType(), "Completed Movies");
     }
@@ -95,7 +95,7 @@ class WatchlistServiceTest {
     void shouldFindByType_thenCompletedSeriesShouldBeReturned() {
         Watchlist actual = watchlistService.findByType(userId1, "Completed Series");
 
-        assertNotNull(actual);
+//        assertNotNull(actual);
         assertEquals(actual.getUserId(), userId1);
         assertEquals(actual.getType(), "Completed Series");
     }
@@ -104,7 +104,7 @@ class WatchlistServiceTest {
     void shouldFindByType_thenPlanToWatchShouldBeReturned() {
         Watchlist actual = watchlistService.findByType(userId1, "Plan to Watch");
 
-        assertNotNull(actual);
+//        assertNotNull(actual);
         assertEquals(actual.getUserId(), userId1);
         assertEquals(actual.getType(), "Plan to Watch");
     }
