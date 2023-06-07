@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
 import { findByUserId, findByType } from "../services/watchlist";
 
 function PlanToWatchTable() {
   const { user } = useContext(AuthContext);
   const [watchables, setWatchables] = useState([]);
+  const [watchlist, setWatchlist] = useState([]);
   const navigate = useNavigate();
   const padding = { padding: "15px" };
 
@@ -16,6 +17,7 @@ function PlanToWatchTable() {
   }, []);
 
   const allWatchables = watchables.watchables;
+  const watchlistId = watchables.id;
 
   return (
     <div className="p-5">
@@ -70,7 +72,12 @@ function PlanToWatchTable() {
                       <button className="btn btn-primary">Update</button>
                     </td>
                     <td>
-                      <button className="btn btn-danger">Delete</button>
+                      <Link
+                        to={`/watchlist/delete/${watchlistId}/${watchable.id}`}
+                        className="btn btn-danger mx-2"
+                      >
+                        Delete
+                      </Link>
                     </td>
                   </tr>
                 );

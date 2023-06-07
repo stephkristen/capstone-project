@@ -33,23 +33,35 @@ public class WatchlistService {
         return repository.findByType(userId, type);
     }
 
-    public void addWatchableToWatchlist(String watchlistId, String watchableId) {
+    public Result<Void> addWatchableToWatchlist(String watchlistId, String watchableId) {
         Optional<Watchlist> optionalWatchlist = repository.findById(watchlistId);
         Optional<Watchable> optionalWatchable = watchableRepository.findById(watchableId);
+
+        Result<Void> result = new Result<>();
 
         if (optionalWatchlist.isPresent() && optionalWatchable.isPresent()) {
             Watchlist watchlist = optionalWatchlist.get();
             Watchable watchable = optionalWatchable.get();
-            watchlist.getWatchables().add(watchable);
-            repository.save(watchlist);
+
+            validate(watchlist, watchable, result);
+
+            if (result.isSuccess()) {
+                watchlist.getWatchables().add(watchable);
+                repository.save(watchlist);
+                result.addMessage("Watchable added to watchlist successfully", ResultType.SUCCESS);
+            }
         } else {
-            throw new ResourceNotFoundException("Watchlist or Watchable not found with the given id");
+            result.addMessage("Watchlist or Watchable not found with the given id", ResultType.NOT_FOUND);
         }
+
+        return result;
     }
 
 
-    public void deleteWatchableFromWatchlist(String watchlistId, String watchableId) {
+    public Result<Void> deleteWatchableFromWatchlist(String watchlistId, String watchableId) {
         Optional<Watchlist> optionalWatchlist = repository.findById(watchlistId);
+
+        Result<Void> result = new Result<>();
 
         if (optionalWatchlist.isPresent()) {
             Watchlist watchlist = optionalWatchlist.get();
@@ -64,11 +76,31 @@ public class WatchlistService {
                 Watchable watchable = optionalWatchable.get();
                 watchables.remove(watchable);
                 repository.save(watchlist);
+                result.addMessage("Watchable removed from watchlist successfully", ResultType.SUCCESS);
             } else {
-                throw new ResourceNotFoundException("Watchable not found in watchlist");
+                result.addMessage("Watchable not found in watchlist", ResultType.NOT_FOUND);
             }
         } else {
-            throw new ResourceNotFoundException("Watchlist not found with id: " + watchlistId);
+            result.addMessage("Watchlist not found with id: " + watchlistId, ResultType.NOT_FOUND);
+        }
+
+        return result;
+    }
+
+
+    private void validate(Watchlist watchlist, Watchable watchable, Result<Void> result) {
+        // Validate the type of watchable based on the watchlist type
+        if ((watchlist.getType().equals("Completed Movies") && watchable.getType().equals("series"))
+                || (watchlist.getType().equals("Completed Series") && watchable.getType().equals("movie"))) {
+            result.addMessage("Cannot add a movie to the series list or a series to the movie list", ResultType.INVALID);
+        }
+
+        // Check for duplicates based on watchable ID
+        boolean isDuplicate = watchlist.getWatchables().stream()
+                .anyMatch(w -> w.getId().equals(watchable.getId()));
+
+        if (isDuplicate) {
+            result.addMessage("Watchable already exists in the watchlist", ResultType.INVALID);
         }
     }
 

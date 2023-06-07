@@ -1,6 +1,8 @@
 package learn.mideo.controller;
 
 import learn.mideo.data.WatchableRepository;
+import learn.mideo.domain.Result;
+import learn.mideo.domain.ResultType;
 import learn.mideo.domain.WatchlistService;
 import learn.mideo.exception.ResourceNotFoundException;
 import learn.mideo.model.Watchable;
@@ -57,16 +59,35 @@ public class WatchlistController {
 
     @PostMapping("/{watchlistId}/addWatchable/{watchableId}")
     public ResponseEntity<?> addWatchableToWatchlist(@PathVariable("watchlistId") String watchlistId, @PathVariable("watchableId") String watchableId) {
-        service.addWatchableToWatchlist(watchlistId, watchableId);
-        return ResponseEntity.ok("Watchable added to watchlist successfully");
+        Result<Void> result = service.addWatchableToWatchlist(watchlistId, watchableId);
+
+        if (result.isSuccess()) {
+            return ResponseEntity.ok(result.getMessages().get(0));
+        } else if (result.getType() == ResultType.INVALID) {
+            return ResponseEntity.badRequest().body(result.getMessages());
+        } else if (result.getType() == ResultType.NOT_FOUND) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
+
 
 
     @DeleteMapping("/{watchlistId}/removeWatchable/{watchableId}")
     public ResponseEntity<?> removeWatchableFromWatchlist(@PathVariable("watchlistId") String watchlistId, @PathVariable("watchableId") String watchableId) {
-        service.deleteWatchableFromWatchlist(watchlistId, watchableId);
-        return ResponseEntity.ok("Watchable removed from watchlist successfully");
+        Result<Void> result = service.deleteWatchableFromWatchlist(watchlistId, watchableId);
+
+        if (result.isSuccess()) {
+            return ResponseEntity.ok(result.getMessages());
+        } else if (result.getType() == ResultType.NOT_FOUND) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result.getMessages());
+        } else {
+            return ResponseEntity.badRequest().body(result.getMessages());
+        }
     }
+
+
 
 
 

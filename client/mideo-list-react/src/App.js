@@ -63,7 +63,7 @@ function App() {
               <Route path="/signup" element={<SignUp />} />
               {/* TODO: Change this path from watchable form to /add and /update */}
               <Route path="/watchableform" element={<WatchableForm />} />
-              <Route path="/watchlist/delete/:watchableid" element={<DeleteConfirmation />} />
+              <Route path="/watchlist/delete/:watchlistId/:watchableId" element={<DeleteConfirmation />} />
             </Routes>
           </main>
         </div>

@@ -126,8 +126,7 @@ function SignUp() {
         <form
           onSubmit={handleSubmit}
           className="container-fluid p-5 rounded-3"
-          style={{ backgroundColor: "rgba(140, 191, 248, 0.521)"}}
-        >
+          style={{ backgroundColor: "rgba(140, 191, 248, 0.521)" }}>
           <h3 className="text-center">Sign Up</h3>
           <div className="mb-3 row">
             <label htmlFor="firstname" className="col-sm-3 col-form-label">
