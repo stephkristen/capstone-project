@@ -47,7 +47,7 @@ function Results() {
     }
 
     return (
-        <div className="container mt-4">
+        <div className="container p-5 mt-4">
             <h2 className="white-text">Search Results</h2>
             <table className="table">
                 <tbody>
