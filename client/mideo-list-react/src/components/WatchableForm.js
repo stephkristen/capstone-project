@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { save } from "../services/watchlist";
+import { saveWatchable } from "../services/watchable";
 
 function WatchableForm({ watchable }) {
     const [selectedList, setSelectedList] = useState('');
@@ -32,7 +33,7 @@ function WatchableForm({ watchable }) {
             genres: genreNames,
             posterPath: watchable.posterPath,
             cast_members: watchable.cast,
-            id: watchable.imdbId,
+            imdbId: watchable.imdbId,
             personalRating: selectedRating,
           };
         
@@ -52,12 +53,35 @@ function WatchableForm({ watchable }) {
         }
 
         try {
-            await save(watchableToAdd);
+            const addedWatchable = await saveWatchable(watchableToAdd);
+            await addWatchableToWatchlist(addedWatchable.id);
         } catch (error) {
         }
 
         navigate("/watchlist");
     };
+
+    const addWatchableToWatchlist = async (watchableId) => {
+        // Replace `watchlistId` with the actual ID of the selected watchlist
+        const watchlistId = "647f56975d9aa5d43d05ddc6";
+    
+        const init = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+        };
+    
+        const response = await fetch(
+          `http://localhost:8080/watchlist/${watchlistId}/addWatchable/${watchableId}`,
+          init
+        );
+    
+        if (!response.ok) {
+          throw new Error("Failed to add watchable to watchlist");
+        }
+      };
 
     return (
         <div className="white-text container">
