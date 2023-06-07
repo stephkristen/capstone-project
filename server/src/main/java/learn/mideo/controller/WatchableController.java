@@ -16,11 +16,9 @@ import java.util.Optional;
 public class WatchableController {
 
     private final WatchableService service;
-    private final MongoTemplate mideoListDB;
 
     public WatchableController(WatchableService service, MongoTemplate mideoListDB) {
         this.service = service;
-        this.mideoListDB = mideoListDB;
     }
 
     @GetMapping(value = "/watchableById/{id}")
@@ -43,7 +41,6 @@ public class WatchableController {
         }
 
         Result<Watchable> result = service.updatePersonalRating(watchable);
-//        watchable.setPersonalRating(watchable.getPersonalRating());
         if (!result.isSuccess()) {
             if (result.getType() == ResultType.NOT_FOUND) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404
