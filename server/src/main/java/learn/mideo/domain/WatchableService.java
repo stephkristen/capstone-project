@@ -31,6 +31,10 @@ public class WatchableService {
         return repository.findById(id);
     }
 
+    public void addWatchable(Watchable watchable) {
+        repository.save(watchable);
+    }
+
     public Result<Watchable> updatePersonalRating(Watchable watchable) {
         Result<Watchable> result = validate(watchable);
         if (!result.isSuccess()) {
@@ -48,6 +52,10 @@ public class WatchableService {
             result.addMessage("Watchable id %s was not found.", ResultType.NOT_FOUND, watchable.getId());
         }
         return result;
+    }
+  
+    public void deleteWatchable(String id) {
+          repository.deleteById(id);
     }
 
     private Result<Watchable> validate(Watchable watchable) {
@@ -73,3 +81,4 @@ public class WatchableService {
         return result;
     }
 }
+

@@ -50,5 +50,11 @@ public class WatchableController {
         }
         return new ResponseEntity<>(watchable, HttpStatus.OK); // 204
     }
+  
+  @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteWatchable(@PathVariable("id") String id) {
+        service.deleteWatchable(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }

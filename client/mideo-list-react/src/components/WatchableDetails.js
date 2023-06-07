@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom"
 import API_KEY from "./config";
 import YouTube from 'react-youtube';
+import WatchableForm from "./WatchableForm";
 
 function WatchableDetails() {
     const [watchable, setWatchable] = useState(null);
@@ -77,13 +78,15 @@ function WatchableDetails() {
                             <p>IMDb Rating: {watchable.imdbRating}/100</p>
                             <p>
                                 Streaming On: {''}
-                                {Object.keys(watchable.streamingInfo.us).join(", ")}
+                                {watchable.streamingInfo && Object.keys(watchable.streamingInfo).join(', ')}
                             </p>
                             </td>
                             <td>
-                                <button className="btn btn-secondary" onClick={handleAddClick}>
+                                {/* <button className="btn btn-secondary" onClick={handleAddClick}>
                                     Add
-                                </button>
+                                </button> */}
+
+                                <WatchableForm watchable={watchable} />
                             </td>
                         </tr>
                         <tr>
