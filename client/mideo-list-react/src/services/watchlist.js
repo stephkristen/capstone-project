@@ -10,16 +10,16 @@ export async function findAll() {
 }
 
 export async function getWatchlistByType(userId, type) {
-  try {
-    const watchlists = await findByType(userId, type);
-    if (watchlists.length > 0) {
-      return watchlists[0];
+    try {
+      const watchlists = await findByType(userId, type);
+      if (watchlists.length > 0) {
+        return watchlists[0];
+      }
+      return null;
+    } catch (error) {
+      throw new Error("Failed to fetch watchlist by type");
     }
-    return null;
-  } catch (error) {
-    throw new Error("Failed to fetch watchlist by type");
   }
-}
 
 export async function findByUserId(userId) {
   const response = await fetch(`${WATCHLIST_API_URL}/byUserId/${userId}`);
@@ -31,7 +31,7 @@ export async function findByUserId(userId) {
 }
 
 export async function findByType(userId, type) {
-	const response = await fetch(`${WATCHLIST_API_URL}/byType/${userId}/${type}`);
+  const response = await fetch(`${WATCHLIST_API_URL}/byType/${userId}/${type}`);
   if (response.ok) {
     return response.json();
   } else if (response.status === 404) {
@@ -42,39 +42,14 @@ export async function findByType(userId, type) {
   }
 }
 
-// async function addWatchableToWatchList(watchlist) {
-// 	const init = {
-// 		method: 'POST',
-// 		headers: {
-// 			'Content-Type': 'application/json',
-// 			Authorization: `Bearer ${localStorage.getItem('jwt')}`,
-// 		},
-// 		body: JSON.stringify(watchlist),
-// 	};
-
-// 	const response = await fetch(`${WATCHLIST_API_URL}/647f56975d9aa5d43d05ddc6/addWatchable/${watchableId}`, init);
-// 	if (response.ok) {
-// 		const data = await response.json();
-// 		return Promise.resolve(data);
-// 	} else if (response.status === 400) {
-// 		const errs = await response.json();
-// 	} else {
-// 		return Promise.reject();
-// 	}
-// }
-
-// export async function save(watchlist) {
-// 	return addWatchableToWatchList(watchlist);
-// }
-
-export async function deleteWatchableById(watchableId) {
+export async function removeWatchableFromWatchlist(watchlistId, watchableId) {
   const init = {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
   };
-  const response = await fetch(`${WATCHLIST_API_URL}/${watchableId}`, init);
+  const response = await fetch(`${WATCHLIST_API_URL}/${watchlistId}/removeWatchable/${watchableId}`, init);
   if (response.ok) {
     return Promise.resolve();
   } else if (response.status === 404) {
@@ -84,4 +59,3 @@ export async function deleteWatchableById(watchableId) {
     return Promise.reject();
   }
 }
-
