@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"
+import { save } from "../services/watchlist";
 
 function WatchableForm({ watchable }) {
     const [selectedList, setSelectedList] = useState('');
@@ -18,18 +19,49 @@ function WatchableForm({ watchable }) {
         setSelectedRating(event.target.value);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
-        console.log('Selected List: ', selectedList);
-        console.log('Selected Rating: ', selectedRating);
+        const genreNames = watchable.genres.map((genre) => genre.name);
+        const streamingServiceNames = watchable.streamingInfo && watchable.streamingInfo.us ? Object.keys(watchable.streamingInfo.us) : [];
+        const watchableToAdd = {
+            type: watchable.type,
+            title: watchable.title,
+            overview: watchable.overview,
+            imdbRating: watchable.imdbRating,
+            genres: genreNames,
+            posterPath: watchable.posterPath,
+            cast_members: watchable.cast,
+            id: watchable.imdbId,
+            personalRating: selectedRating,
+          };
+        
+        if (watchable.type === "series") {
+            watchableToAdd.firstAirYear = watchable.firstAirYear;
+            watchableToAdd.lastAirYear = watchable.lastAirYear;
+        } else {
+            watchableToAdd.year = watchable.year;
+        }
 
-        // navigate("/watchlist");
+        if (streamingServiceNames.length > 0) {
+            watchableToAdd.streamingServices = streamingServiceNames;
+        }
+
+        if (watchable.youtubeTrailerVideoLink) {
+            watchableToAdd.trailerLink = watchable.youtubeTrailerVideoLink;
+        }
+
+        try {
+            await save(watchableToAdd);
+        } catch (error) {
+        }
+
+        navigate("/watchlist");
     };
 
     return (
         <div className="white-text container">
-            <h2>Add</h2>
+            <h2>Add To WatchList</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="watchableType">Watchable List:</label>
