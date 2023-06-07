@@ -76,62 +76,35 @@ class WatchlistServiceTest {
         assertEquals(user1watchlists, actual);
     }
 
-    @Test
-    public void shouldNotFindUserByNonExistentId() {
-
-    }
-
-//    @Test
-//    void shouldNotFindByNonExistentUserId() {
-//        List<Watchlist> found = watchlistService.findByUserId("0");
-//        assertNull(found);
-//    }
 
     @Test
     void shouldFindByType_thenCompletedMoviesShouldBeReturned() {
+        when(watchlistRepository.findByType(userId1, "Completed Movies")).thenReturn(completedMovies);
         Watchlist actual = watchlistService.findByType(userId1, "Completed Movies");
 
-//        assertNotNull(actual);
+        assertNotNull(actual);
         assertEquals(actual.getUserId(), userId1);
         assertEquals(actual.getType(), "Completed Movies");
     }
 
     @Test
     void shouldFindByType_thenCompletedSeriesShouldBeReturned() {
+        when(watchlistRepository.findByType(userId1, "Completed Series")).thenReturn(completedSeries);
         Watchlist actual = watchlistService.findByType(userId1, "Completed Series");
 
-//        assertNotNull(actual);
+        assertNotNull(actual);
         assertEquals(actual.getUserId(), userId1);
         assertEquals(actual.getType(), "Completed Series");
     }
 
     @Test
     void shouldFindByType_thenPlanToWatchShouldBeReturned() {
+        when(watchlistRepository.findByType(userId1, "Plan to Watch")).thenReturn(planToWatch);
         Watchlist actual = watchlistService.findByType(userId1, "Plan to Watch");
 
-//        assertNotNull(actual);
+        assertNotNull(actual);
         assertEquals(actual.getUserId(), userId1);
         assertEquals(actual.getType(), "Plan to Watch");
-    }
-
-//    @Test
-//    void shouldNotFindByNonExistentType() {
-//        Watchlist actual = watchlistService.findByType(userId1,"Non Existent List");
-//
-//        assertNull(actual);
-//        assertThrows(NullPointerException.class);
-//    }
-  
-    public void shouldFindListOfEachType() {
-        //movies
-        Watchlist completedMoviesWatchlist = watchlistService.findByType(userId1,"Completed Movies");
-        assertEquals("Completed Movies", completedMoviesWatchlist.getType());
-
-        //series
-        Watchlist completedSeriesWatchlist = watchlistService.findByType(userId1,"Completed Series");
-        assertEquals("Completed Movies", completedSeriesWatchlist.getType());
-
-        //plan-to-watch
     }
 
 }

@@ -84,8 +84,8 @@ public class WatchlistRepositoryTest {
         seriesWatchables.add(watchable2);
         movieWatchables.add(watchable3);
 
-        Watchlist completedMovies = new Watchlist("Completed Movies", movieWatchables, USER_ID_LIST.get(0));
-        Watchlist completedSeries = new Watchlist("Completed Series", seriesWatchables, USER_ID_LIST.get(0));
+        Watchlist completedMovies = new Watchlist("1", "Completed Movies", movieWatchables, USER_ID_LIST.get(0));
+        Watchlist completedSeries = new Watchlist("2","Completed Series", seriesWatchables, USER_ID_LIST.get(0));
 
         watchlistRepository.save(completedMovies);
         watchlistRepository.save(completedSeries);
