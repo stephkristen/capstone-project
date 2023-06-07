@@ -1,12 +1,15 @@
 package learn.mideo.controller;
 
+import learn.mideo.data.WatchableRepository;
 import learn.mideo.domain.WatchlistService;
+import learn.mideo.exception.ResourceNotFoundException;
 import learn.mideo.model.Watchable;
 import learn.mideo.model.Watchlist;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000"})
@@ -14,9 +17,11 @@ import java.util.List;
 public class WatchlistController {
 
     private final WatchlistService service;
+    private final WatchableRepository watchableRepository;
 
-    public WatchlistController(WatchlistService service) {
+    public WatchlistController(WatchlistService service, WatchableRepository watchableRepository) {
         this.service = service;
+        this.watchableRepository = watchableRepository;
     }
 
     @GetMapping
@@ -34,11 +39,21 @@ public class WatchlistController {
         return ResponseEntity.ok().body(service.findByType(userId, type));
     }
 
-    @PostMapping("/{watchlistId}/addWatchable")
-    public ResponseEntity<?> addWatchableToWatchlist(@PathVariable("watchlistId") String watchlistId, @RequestBody Watchable watchable) {
-        service.addWatchableToWatchlist(watchlistId, watchable);
+    @PostMapping("/{watchlistId}/addWatchable/{watchableId}")
+    public ResponseEntity<?> addWatchableToWatchlist(@PathVariable("watchlistId") String watchlistId, @PathVariable("watchableId") String watchableId) {
+        service.addWatchableToWatchlist(watchlistId, watchableId);
         return ResponseEntity.ok("Watchable added to watchlist successfully");
     }
+
+
+    @DeleteMapping("/{watchlistId}/removeWatchable/{watchableId}")
+    public ResponseEntity<?> removeWatchableFromWatchlist(@PathVariable("watchlistId") String watchlistId, @PathVariable("watchableId") String watchableId) {
+        service.deleteWatchableFromWatchlist(watchlistId, watchableId);
+        return ResponseEntity.ok("Watchable removed from watchlist successfully");
+    }
+
+
+
 
 //
 //    @PostMapping(value = "/save")

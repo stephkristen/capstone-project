@@ -51,6 +51,12 @@ public class WatchableController {
         return ResponseEntity.ok().body(service.save(watchable));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteWatchable(@PathVariable("id") String id) {
+        service.deleteWatchable(id);
+        return ResponseEntity.noContent().build();
+    }
+
 //    @PatchMapping(value = "/updatePersonalRating/{id}")
 //    public ResponseEntity<Watchable> updateWatchablePersonalRating(
 //            @PathVariable("id") String id,

@@ -28,4 +28,13 @@ public class WatchableService {
     public Optional<Watchable> findWatchableById(String id) {
         return repository.findById(id);
     }
+
+    public void addWatchable(Watchable watchable) {
+        repository.save(watchable);
+    }
+
+    public void deleteWatchable(String id) {
+        repository.deleteById(id);
+    }
 }
+

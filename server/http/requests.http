@@ -222,3 +222,21 @@ Content-Type: application/json
     ],
     "trailerLink": "https://www.youtube.com/watch?v=8dItOM6eYXY"
     }
+
+###
+
+DELETE http://localhost:8080/watchlist/647f56975d9aa5d43d05ddc6/removeWatchable/647f7e765d9aa5d43d05ddcd HTTP/1.1
+
+###
+
+GET http://localhost:8080/watchable/watchableById/647f7e765d9aa5d43d05ddcc HTTP/1.1
+Content-Type: application/json
+
+###
+
+POST http://localhost:8080/watchlist/647f56975d9aa5d43d05ddc6/addWatchable/647f7e765d9aa5d43d05ddcd HTTP/1.1
+Content-Type: application/json
+
+###
+
+DELETE http://localhost:8080/watchable/647f7e765d9aa5d43d05ddce HTTP/1.1
