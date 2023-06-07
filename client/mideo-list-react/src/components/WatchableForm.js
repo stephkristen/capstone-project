@@ -1,12 +1,23 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"
+import AuthContext from "../contexts/AuthContext";
 import { save } from "../services/watchlist";
 import { saveWatchable } from "../services/watchable";
+import { findByType, findByUserId } from "../services/watchlist";
+import { useEffect, useContext } from "react";
 
 function WatchableForm({ watchable }) {
-    const [selectedList, setSelectedList] = useState('');
+    const { user } = useContext(AuthContext);
+    const [watchlist, setWatchlist] = useState([])
+    const [selectedList, setSelectedList] = useState("Completed Movies");
     const [selectedRating, setSelectedRating] = useState('');
     const navigate = useNavigate();
+
+    useEffect(() => {
+        findByUserId(user.id)
+          .then(setWatchlist)
+          .catch(() => navigate("/error"));
+      }, []);
 
 	const handleCancel = () => {
         navigate("/");
@@ -63,7 +74,8 @@ function WatchableForm({ watchable }) {
 
     const addWatchableToWatchlist = async (watchableId) => {
         // Replace `watchlistId` with the actual ID of the selected watchlist
-        const watchlistId = "647f56975d9aa5d43d05ddc6";
+        const watchlist = await findByType(user.id, selectedList);
+        const watchlistId = watchlist.id;
     
         const init = {
           method: "POST",
@@ -90,10 +102,9 @@ function WatchableForm({ watchable }) {
                 <div>
                     <label htmlFor="watchableType">Watchable List:</label>
                     <select id="watchableType" value={selectedList} onChange={handleListChange} required>
-                        <option value=''>Select a List Type</option>
-                        <option value="Completed Movies">Completed Movies</option>
-                        <option value="Completed Series">Completed Series</option>
-                        <option value="Plan to Watch">Plan to Watch</option>                        
+                        <option value="Completed Movies" selected={selectedList === "Completed Movies"}>Completed Movies</option>
+                        <option value="Completed Series" selected={selectedList === "Completed Series"}>Completed Series</option>
+                        <option value="Plan to Watch" selected={selectedList === "Plan to Watch"}>Plan to Watch</option>                        
                     </select>
                 </div>
 

@@ -240,3 +240,7 @@ Content-Type: application/json
 ###
 
 DELETE http://localhost:8080/watchable/647f7e765d9aa5d43d05ddce HTTP/1.1
+
+###
+
+GET http://localhost:8080/watchlist/byUserId/647e28cce9b45529f92d8dff HTTP/1.1
