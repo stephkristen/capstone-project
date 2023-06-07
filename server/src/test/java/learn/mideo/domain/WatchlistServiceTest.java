@@ -76,6 +76,11 @@ class WatchlistServiceTest {
         assertEquals(user1watchlists, actual);
     }
 
+    @Test
+    public void shouldNotFindUserByNonExistentId() {
+
+    }
+
 //    @Test
 //    void shouldNotFindByNonExistentUserId() {
 //        List<Watchlist> found = watchlistService.findByUserId("0");
@@ -116,5 +121,17 @@ class WatchlistServiceTest {
 //        assertNull(actual);
 //        assertThrows(NullPointerException.class);
 //    }
+  
+    public void shouldFindListOfEachType() {
+        //movies
+        Watchlist completedMoviesWatchlist = watchlistService.findByType(userId1,"Completed Movies");
+        assertEquals("Completed Movies", completedMoviesWatchlist.getType());
+
+        //series
+        Watchlist completedSeriesWatchlist = watchlistService.findByType(userId1,"Completed Series");
+        assertEquals("Completed Movies", completedSeriesWatchlist.getType());
+
+        //plan-to-watch
+    }
 
 }
