@@ -8,9 +8,9 @@ import {
 
 import { useState, useEffect } from "react";
 import AuthContext from "./contexts/AuthContext";
-
 import WatchableForm from "./components/WatchableForm"
 import FormErrors from "./components/FormErrors";
+import UpdateConfirmation from "./components/UpdateConfirmation";
 import NavBar from "./components/NavBar";
 import Home from "./components/Home";
 import NotFound from "./components/NotFound";
@@ -61,7 +61,7 @@ function App() {
               <Route path="/error" element={<Error></Error>}></Route>
               <Route path="/login" element={!user ? <Login /> : <Navigate to="/" replace={true} />}/>
               <Route path="/signup" element={<SignUp />} />
-              {/* TODO: Change this path from watchable form to /add and /update */}
+              <Route path="/watchlist/update/:watchlistId/:watchableId" element={<UpdateConfirmation />} />
               <Route path="/watchableform" element={<WatchableForm />} />
               <Route path="/watchlist/delete/:watchlistId/:watchableId" element={<DeleteConfirmation />} />
             </Routes>

@@ -129,7 +129,12 @@ function CompletedMoviesTable() {
                     </td>
                     <td className="p-4">{watchable.personalRating}/100</td>
                     <td>
-                      <button className="btn btn-primary">Update</button>
+                      <Link  
+                        to={`/watchlist/update/${watchlistId}/${watchable.id}`}
+                        className="btn btn-primary"
+                      >
+                        Update
+                      </Link>
                     </td>
                     <td>
                       <Link

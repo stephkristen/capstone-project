@@ -113,7 +113,7 @@ function WatchableForm({ watchable }) {
                             className="m-2"
                             type="number"
                             id="watchableRating"
-                            min={1}
+                            min={0}
                             max={100}
                             step={1}
                             value={selectedRating}
