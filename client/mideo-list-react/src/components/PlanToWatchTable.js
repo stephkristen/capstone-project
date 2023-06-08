@@ -21,6 +21,17 @@ function PlanToWatchTable() {
   const allWatchables = watchables.watchables;
   const watchlistId = watchables.id;
 
+  if (allWatchables == 0) {
+    return (
+      <div className="p-4">
+        <div className="alert alert-danger" role="alert">
+          Your Plan to Watch Watchlist is empty. Click on Find a Watchable to add to
+          your list.
+        </div>
+      </div>
+    );
+  }
+
   const handleSort = (event) => {
     const selectedSortBy = event.target.value;
     setSortBy(selectedSortBy);
@@ -63,7 +74,10 @@ function PlanToWatchTable() {
           <div>
             <h2
               className="mb-4"
-              style={{ textAlign: "center", color: "rgba(255, 255, 255, 0.808)" }}
+              style={{
+                textAlign: "center",
+                color: "rgba(255, 255, 255, 0.808)",
+              }}
             >
               Plan to Watch List
             </h2>
@@ -146,8 +160,8 @@ function PlanToWatchTable() {
       )}
       {error && (
         <div className="alert alert-danger" role="alert">
-          Your Plan to Watch Table is empty. Click on Find a Watchable to
-          add to your list.
+          Your Plan to Watch Watchlist is empty. Click on Find a Watchable to add to
+          your list.
         </div>
       )}
     </div>

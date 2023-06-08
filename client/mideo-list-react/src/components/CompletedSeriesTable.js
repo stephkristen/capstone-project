@@ -21,6 +21,17 @@ function CompletedSeriesTable() {
   const allWatchables = watchables.watchables;
   const watchlistId = watchables.id;
 
+  if (allWatchables == 0) {
+    return (
+      <div className="p-4">
+        <div className="alert alert-danger" role="alert">
+          Your Completed Series Watchlist is empty. Click on Find a Watchable to add to
+          your list.
+        </div>
+      </div>
+    );
+  }
+  
   const handleSort = (event) => {
     const selectedSortBy = event.target.value;
     setSortBy(selectedSortBy);
@@ -145,7 +156,7 @@ function CompletedSeriesTable() {
       )}
       {error && (
         <div className="alert alert-danger" role="alert">
-          Your Completed Series Table is empty. Click on Find a Watchable to
+          Your Completed Series Watchlist is empty. Click on Find a Watchable to
           add to your list.
         </div>
       )}
