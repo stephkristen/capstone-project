@@ -53,7 +53,7 @@ function WatchableDetails() {
                     <div className="m-3">
                         <h1 className="title-white-text">{watchable.title}</h1>
                     </div>
-                    <div className="flex-container">
+                    <div className="flex-container p-5">
                         <table className="details-table">
                                 <tbody>
                                 <tr>
@@ -104,7 +104,7 @@ function WatchableDetails() {
                                 </tr>
                                 <tr>
                                 <td colSpan="2" className="trailer-cell">
-                                    <div className="m-2">
+                                    <div className="m-2 d-flex justify-content-center">
                                         {videoId ? (
                                             <YouTube
                                                 videoId={videoId}

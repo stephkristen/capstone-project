@@ -69,39 +69,36 @@ function WatchableForm({ watchable }) {
     }
 
     try {
-      const addedWatchable = await saveWatchable(watchableToAdd).catch(
-        setErrors
-      );
-      await addWatchableToWatchlist(addedWatchable.id).catch(setErrors);
+      const addedWatchable = await saveWatchable(watchableToAdd);
+      await addWatchableToWatchlist(addedWatchable.id);
     } catch (error) {}
 
     // navigate("/watchlist");
   };
 
-  const addWatchableToWatchlist = async (watchableId) => {
-    // Replace `watchlistId` with the actual ID of the selected watchlist
-    const watchlist = await findByType(user.id, selectedList);
-    const watchlistId = watchlist.id;
+   const addWatchableToWatchlist = async (watchableId) => {
+        const watchlist = await findByType(user.id, selectedList);
+        const watchlistId = watchlist.id;
+    
+        const init = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+          },
+        };
+    
+        const response = await fetch(
+          `http://localhost:8080/watchlist/${watchlistId}/addWatchable/${watchableId}`,
+          init
+        );
 
-    const init = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-      },
-    };
+        if (!response.ok) {
+          return Promise.reject();
+        }
+     };
 
-    const response = await fetch(
-      `http://localhost:8080/watchlist/${watchlistId}/addWatchable/${watchableId}`,
-      init
-    );
-
-    if (!response.ok) {
-      return Promise.reject();
-    }
-  };
-
-  console.log(errors);
+  console.log(errors);   
 
   return (
     <div id="watchlist-form" className="white-text rounded container p-3">
