@@ -57,3 +57,21 @@ body {
 #here {
     color: #090908;
 }
+
+#watchlist-form {
+    background-color: rgb(238, 237, 239, .09);
+    border: .3rem solid rgb(238, 237, 239, .2);
+}
+
+.button-container {
+    display: flex;
+    justify-content: center, flex-end;
+}
+
+.button-container-child {
+    width: 40%;
+}
+
+#poster {
+    padding-left: 15px;
+}
