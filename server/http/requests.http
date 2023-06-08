@@ -290,7 +290,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJtaWRlbyIsInN1YiI6ImJvYkBqb
 
 ###
 
-POST http://localhost:8080/watchlist/647f56975d9aa5d43d05ddc8/addWatchable/647fdebe2c841116eea0e320 HTTP/1.1
+POST http://localhost:8080/watchlist/647f56975d9aa5d43d05ddc8/addWatchable/648140706998250652bd7780 HTTP/1.1
 Content-Type: application/json
 
 ###
