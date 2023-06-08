@@ -1,78 +1,83 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import AuthContext from "../contexts/AuthContext";
+import FormErrors from "./FormErrors";
 import { save } from "../services/watchlist";
 import { saveWatchable } from "../services/watchable";
 import { findByType, findByUserId } from "../services/watchlist";
 import { useEffect, useContext } from "react";
 
 function WatchableForm({ watchable }) {
-    const { user } = useContext(AuthContext);
-    const [watchlist, setWatchlist] = useState([])
-    const [selectedList, setSelectedList] = useState("Completed Movies");
-    const [selectedRating, setSelectedRating] = useState('');
-    const navigate = useNavigate();
+  const { user } = useContext(AuthContext);
+  const [watchlist, setWatchlist] = useState([]);
+  const [selectedList, setSelectedList] = useState("Completed Movies");
+  const [selectedRating, setSelectedRating] = useState("");
+  const [errors, setErrors] = useState([]);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        findByUserId(user.id)
-          .then(setWatchlist)
-          .catch(() => navigate("/error"));
-      }, []);
+  useEffect(() => {
+    findByUserId(user.id)
+      .then(setWatchlist)
+      .catch(() => navigate("/error"));
+  }, []);
 
-	const handleCancel = () => {
-        navigate("/");
+  const handleCancel = () => {
+    navigate("/");
+  };
+
+  const handleListChange = (event) => {
+    setSelectedList(event.target.value);
+  };
+
+  const handleRatingChange = (event) => {
+    setSelectedRating(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const genreNames = watchable.genres.map((genre) => genre.name);
+    const streamingServiceNames =
+      watchable.streamingInfo && watchable.streamingInfo.us
+        ? Object.keys(watchable.streamingInfo.us)
+        : [];
+    const watchableToAdd = {
+      type: watchable.type,
+      title: watchable.title,
+      overview: watchable.overview,
+      imdbRating: watchable.imdbRating,
+      genres: genreNames,
+      posterPath: watchable.posterPath,
+      cast_members: watchable.cast,
+      imdbId: watchable.imdbId,
+      personalRating: selectedRating,
     };
 
-    const handleListChange = (event) => {
-        setSelectedList(event.target.value);
-    };
+    if (watchable.type === "series") {
+      watchableToAdd.firstAirYear = watchable.firstAirYear;
+      watchableToAdd.lastAirYear = watchable.lastAirYear;
+    } else {
+      watchableToAdd.year = watchable.year;
+    }
 
-    const handleRatingChange = (event) => {
-        setSelectedRating(event.target.value);
-    };
+    if (streamingServiceNames.length > 0) {
+      watchableToAdd.streamingServices = streamingServiceNames;
+    }
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    if (watchable.youtubeTrailerVideoLink) {
+      watchableToAdd.trailerLink = watchable.youtubeTrailerVideoLink;
+    }
 
-        const genreNames = watchable.genres.map((genre) => genre.name);
-        const streamingServiceNames = watchable.streamingInfo && watchable.streamingInfo.us ? Object.keys(watchable.streamingInfo.us) : [];
-        const watchableToAdd = {
-            type: watchable.type,
-            title: watchable.title,
-            overview: watchable.overview,
-            imdbRating: watchable.imdbRating,
-            genres: genreNames,
-            posterPath: watchable.posterPath,
-            cast_members: watchable.cast,
-            imdbId: watchable.imdbId,
-            personalRating: selectedRating,
-          };
-        
-        if (watchable.type === "series") {
-            watchableToAdd.firstAirYear = watchable.firstAirYear;
-            watchableToAdd.lastAirYear = watchable.lastAirYear;
-        } else {
-            watchableToAdd.year = watchable.year;
-        }
+    try {
+      const addedWatchable = await saveWatchable(watchableToAdd);
+      await addWatchableToWatchlist(addedWatchable.id);
+      navigate("/watchlist");
+    } catch (error) {
+    }
+    
+  };
 
-        if (streamingServiceNames.length > 0) {
-            watchableToAdd.streamingServices = streamingServiceNames;
-        }
-
-        if (watchable.youtubeTrailerVideoLink) {
-            watchableToAdd.trailerLink = watchable.youtubeTrailerVideoLink;
-        }
-
-        try {
-            const addedWatchable = await saveWatchable(watchableToAdd);
-            await addWatchableToWatchlist(addedWatchable.id);
-            navigate("/watchlist");
-        } catch (error) {
-        }
-
-    };
-
-    const addWatchableToWatchlist = async (watchableId) => {
+   const addWatchableToWatchlist = async (watchableId) => {
         const watchlist = await findByType(user.id, selectedList);
         const watchlistId = watchlist.id;
     
@@ -88,9 +93,9 @@ function WatchableForm({ watchable }) {
           `http://localhost:8080/watchlist/${watchlistId}/addWatchable/${watchableId}`,
           init
         );
-    
+
         if (!response.ok) {
-          throw new Error("Failed to add watchable to watchlist");
+          return Promise.reject();
         }
       };
 
@@ -133,9 +138,14 @@ function WatchableForm({ watchable }) {
                             </div>
                     </div>
                 </form>
+
             </div>
-        </div>
-    );
+          </div>
+        </form>
+      </div>
+      {errors.length > 0 && <FormErrors errors={errors} />}
+    </div>
+  );
 }
 
 export default WatchableForm;

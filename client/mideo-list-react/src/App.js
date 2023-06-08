@@ -27,6 +27,7 @@ import './App.scss';
 
 import { refresh } from './services/auth';
 import DeleteConfirmation from "./components/DeleteConfirmation";
+import AboutUs from "./components/AboutUs";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -64,6 +65,7 @@ function App() {
               <Route path="/watchlist/update/:watchlistId/:watchableId" element={<UpdateConfirmation />} />
               <Route path="/watchableform" element={<WatchableForm />} />
               <Route path="/watchlist/delete/:watchlistId/:watchableId" element={<DeleteConfirmation />} />
+              <Route path="/aboutus" element={<AboutUs />} />
             </Routes>
           </main>
         </div>
