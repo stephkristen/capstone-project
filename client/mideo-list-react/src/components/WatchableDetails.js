@@ -58,7 +58,7 @@ function WatchableDetails() {
                                 <tbody>
                                 <tr>
                                     <div className="col-6">
-                                        <td  className="p-3" >
+                                        <td id="poster" >
                                         <img
                                             src={watchable.posterURLs[185]}
                                             alt="Poster"
@@ -66,7 +66,7 @@ function WatchableDetails() {
                                         />
                                         </td>
                                     </div>
-                                    <td className="p-1" style={{color: "white"}}>
+                                    <td id="watchable-details" className="p-2" style={{color: "white"}}>
                                     {watchable.type === "movie" ? (
                                     <h5>Year: {watchable.year}</h5>
                                 ) : (
