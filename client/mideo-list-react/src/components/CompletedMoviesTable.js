@@ -21,6 +21,17 @@ function CompletedMoviesTable() {
   const allWatchables = watchables.watchables;
   const watchlistId = watchables.id;
 
+  if (allWatchables == 0) {
+    return (
+      <div className="p-4">
+        <div className="alert alert-danger" role="alert">
+          Your Completed Movies Watchlist is empty. Click on Find a Watchable to add to
+          your list.
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="p-5">
       {allWatchables && (
@@ -91,7 +102,7 @@ function CompletedMoviesTable() {
       )}
       {error && (
         <div className="alert alert-danger" role="alert">
-          Your Completed Watchlist Table is empty. Click on Find a Watchable to
+          Your Completed Movies Watchlist is empty. Click on Find a Watchable to
           add to your list.
         </div>
       )}
