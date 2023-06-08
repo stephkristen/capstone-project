@@ -33,6 +33,17 @@ public class WatchlistService {
         return repository.findByType(userId, type);
     }
 
+    public List<Watchlist> createWatchlists(String userId) {
+        Watchlist completedMovies = new Watchlist("Completed Movies", userId);
+        Watchlist completedSeries = new Watchlist("Completed Series", userId);
+        Watchlist planToWatch = new Watchlist("Plan to Watch", userId);
+        repository.save(completedMovies);
+        repository.save(completedSeries);
+        repository.save(planToWatch);
+
+        return repository.findByUserId(userId);
+    }
+
     public Result<Void> addWatchableToWatchlist(String watchlistId, String watchableId) {
         Optional<Watchlist> optionalWatchlist = repository.findById(watchlistId);
         Optional<Watchable> optionalWatchable = watchableRepository.findById(watchableId);
