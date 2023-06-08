@@ -75,6 +75,9 @@ function WatchableDetails() {
                                     </h5>
                                 )}
                                     <p>
+                                        {watchable.type}
+                                    </p>
+                                    <p>
                                         {watchable.genres.map((genre) => genre.name).join(", ")}
                                     </p>
                                     <p>
