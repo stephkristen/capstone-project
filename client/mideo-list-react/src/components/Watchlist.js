@@ -39,13 +39,13 @@ function Watchlist() {
     <div className="container p-5">
       {user && (
         <>
-          <h1 className="p-4" style={{ textAlign: "center", color: "white"  }}>
+          <h1 className="p-4" style={{ textAlign: "center", color: "rgba(255, 255, 255, 0.808)" }}>
             Welcome, {user.firstName}!
           </h1>
         </>
       )}
       <div>
-        <h2 style={{ color: "white" }}>Your Lists</h2>
+        <h2 style={{ color: "rgba(255, 255, 255, 0.808)" }}>Your Lists</h2>
       </div>
       <div className="mt-4">
         <select className="form-select" value={list} onChange={handleOnChange}>
@@ -61,7 +61,7 @@ function Watchlist() {
       <div>
       <div className="py-3" style={{ textAlign: "center" }}>
         <button className="btn btn-info" onClick={handleFindButton}>
-          Find a Watchable to Add to List
+          Find a Watchable
         </button>
       </div>
       </div>
