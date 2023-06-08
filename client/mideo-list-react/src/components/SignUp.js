@@ -122,12 +122,12 @@ function SignUp() {
   // );
    return (
     <div className="container h-100 d-flex justify-content-center align-items-center">
-      <div className="container w-75 mt-3 py-5">
+      <div className="container w-75 py-5">
         <form
           onSubmit={handleSubmit}
-          className="container-fluid p-5 rounded-3"
+          className="container-fluid p-4 rounded-3"
           style={{ backgroundColor: "rgba(140, 191, 248, 0.521)" }}>
-          <h3 className="text-center">Sign Up</h3>
+          <h3 className="text-center pb-3">Sign Up</h3>
           <div className="mb-3 row">
             <label htmlFor="firstname" className="col-sm-3 col-form-label">
               First Name

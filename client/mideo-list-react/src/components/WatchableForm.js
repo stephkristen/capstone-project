@@ -95,40 +95,45 @@ function WatchableForm({ watchable }) {
       };
 
     return (
-        <div className="white-text container">
-            <h2>Add To WatchList</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="watchableType">Watchable List:</label>
-                    <select id="watchableType" value={selectedList} onChange={handleListChange} required>
-                        <option value="Completed Movies" selected={selectedList === "Completed Movies"}>Completed Movies</option>
-                        <option value="Completed Series" selected={selectedList === "Completed Series"}>Completed Series</option>
-                        <option value="Plan to Watch" selected={selectedList === "Plan to Watch"}>Plan to Watch</option>                        
-                    </select>
-                </div>
-
-                <div>
-                    <label htmlFor="watchableRating">Rating: </label>
-                    <input
-                        type="number"
-                        id="watchableRating"
-                        min={1}
-                        max={100}
-                        step={1}
-                        value={selectedRating}
-                        onChange={handleRatingChange}
-                    />
-                </div>
-
-                <div className="button-container">
-                    <button className="btn btn-primary" type="submit">
-                        Add
-                    </button>
-                    <button className="btn btn-secondary" onClick={handleCancel}>
-                        Cancel
-                    </button>
-                </div>
-            </form>
+        <div id="watchlist-form" className="white-text rounded container p-3">
+            <div className="flex-container p-1">
+                <h2 className="m-1">Add To WatchList</h2>
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label  className="p-1 m-1" htmlFor="watchableType">Watchable List:</label>
+                        <select id="watchableType" className="p-1 m-2" value={selectedList} onChange={handleListChange} required>
+                            <option value="Completed Movies" selected={selectedList === "Completed Movies"}>Completed Movies</option>
+                            <option value="Completed Series" selected={selectedList === "Completed Series"}>Completed Series</option>
+                            <option value="Plan to Watch" selected={selectedList === "Plan to Watch"}>Plan to Watch</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label className="p-1 m-1" htmlFor="watchableRating">Rating: </label>
+                        <input
+                            className="m-2"
+                            type="number"
+                            id="watchableRating"
+                            min={1}
+                            max={100}
+                            step={1}
+                            value={selectedRating}
+                            onChange={handleRatingChange}
+                        />
+                    </div>
+                    <div className="button-container p-2">
+                         <div className="button-container-child">
+                                <button className="btn btn-info" type="submit">
+                                    Add
+                                </button>
+                            </div>
+                            <div className="button-container-child">
+                                <button className="btn btn-secondary" onClick={handleCancel}>
+                                    Cancel
+                                </button>
+                            </div>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }
