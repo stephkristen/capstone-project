@@ -43,9 +43,9 @@ function Login() {
       <div className="container w-75 py-5">
         <form
           onSubmit={handleSubmit}
-          className="container-fluid p-5 rounded-3"
+          className="container-fluid p-4 rounded-3"
           style={{ backgroundColor: "rgba(140, 191, 248, 0.521)" }}>
-          <h3 className="text-center">Log In</h3>
+          <h3 className="text-center pb-3">Log In</h3>
           {location.state?.msg && (
             <div className="alert alert-success" role="alert">
               {location.state.msg}

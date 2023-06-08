@@ -8,15 +8,15 @@ function CompletedMoviesTable() {
   const { user } = useContext(AuthContext);
   const [watchables, setWatchables] = useState([]);
   const [watchlist, setWatchlist] = useState([]);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
   const padding = { padding: "15px" };
 
   useEffect(() => {
     findByType(user.id, "Completed%20Movies")
       .then(setWatchables)
-      .catch(() => navigate("/error"));
+      .catch(() => setError(true));
   }, []);
-
 
   const allWatchables = watchables.watchables;
   const watchlistId = watchables.id;
@@ -28,7 +28,10 @@ function CompletedMoviesTable() {
           <div>
             <h2
               className="mb-4"
-              style={{ textAlign: "center", color: "white" }}
+              style={{
+                textAlign: "center",
+                color: "rgba(255, 255, 255, 0.808)",
+              }}
             >
               Completed Movies List
             </h2>
@@ -85,6 +88,12 @@ function CompletedMoviesTable() {
             </tbody>
           </table>
         </>
+      )}
+      {error && (
+        <div className="alert alert-danger" role="alert">
+          Your Completed Watchlist Table is empty. Click on Find a Watchable to
+          add to your list.
+        </div>
       )}
     </div>
   );
