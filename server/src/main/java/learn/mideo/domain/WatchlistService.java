@@ -97,7 +97,7 @@ public class WatchlistService {
 
         // Check for duplicates based on watchable ID
         boolean isDuplicate = watchlist.getWatchables().stream()
-                .anyMatch(w -> w.getId().equals(watchable.getId()));
+                .anyMatch(w -> w.getOverview().equals(watchable.getOverview()));
 
         if (isDuplicate) {
             result.addMessage("Watchable already exists in the watchlist", ResultType.INVALID);

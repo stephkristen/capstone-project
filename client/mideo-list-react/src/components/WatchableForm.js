@@ -66,14 +66,13 @@ function WatchableForm({ watchable }) {
         try {
             const addedWatchable = await saveWatchable(watchableToAdd);
             await addWatchableToWatchlist(addedWatchable.id);
+            navigate("/watchlist");
         } catch (error) {
         }
 
-        navigate("/watchlist");
     };
 
     const addWatchableToWatchlist = async (watchableId) => {
-        // Replace `watchlistId` with the actual ID of the selected watchlist
         const watchlist = await findByType(user.id, selectedList);
         const watchlistId = watchlist.id;
     
