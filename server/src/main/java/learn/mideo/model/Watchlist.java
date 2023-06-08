@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.PersistenceConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection="watchlist")
@@ -28,6 +29,10 @@ public class Watchlist {
         this.type = type;
         this.watchables = watchables;
         this.userId = userId;
+    }
+
+    public Watchlist(String type, String userId) {
+        this(type, new ArrayList<>(), userId);
     }
 
     public String getId() {
