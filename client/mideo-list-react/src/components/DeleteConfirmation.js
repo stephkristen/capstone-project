@@ -24,7 +24,7 @@ function DeleteConfirmation() {
 	}, []);
 
 	return (
-		<div className="container h-100 d-flex justify-content-center align-items-center">
+		<div className="container h-100 d-flex justify-content-center align-items-center p-5">
             <div className="container w-75 py-5">
                 {watchable && (
                 <>

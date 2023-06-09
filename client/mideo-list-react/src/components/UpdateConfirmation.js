@@ -87,7 +87,7 @@ function UpdateConfirmation() {
     };
 
     return (
-        <div className="container h-100 d-flex justify-content-center align-items-center">
+        <div className="container h-100 d-flex justify-content-center align-items-center p-5">
           <div className="container w-75 py-5">
             {watchable && (
               <>
@@ -132,8 +132,8 @@ function UpdateConfirmation() {
                       </select>
                     </div>
                   </div>
-                  <div>
-                    <button type="button" className="btn btn-primary" onClick={handleUpdate}>
+                  <div className='p-1'>
+                    <button type="button" className="btn btn-primary my-2" onClick={handleUpdate}>
                         Update
                     </button>
                     <Link to='/watchlist' className='btn btn-secondary mx-2'>
