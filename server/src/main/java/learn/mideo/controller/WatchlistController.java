@@ -62,7 +62,7 @@ public class WatchlistController {
         Result<Void> result = service.addWatchableToWatchlist(watchlistId, watchableId);
 
         if (result.isSuccess()) {
-            return ResponseEntity.ok(result.getMessages().get(0));
+            return ResponseEntity.ok(HttpStatus.OK);
         } else if (result.getType() == ResultType.INVALID) {
             return ResponseEntity.badRequest().body(result.getMessages());
         } else if (result.getType() == ResultType.NOT_FOUND) {
