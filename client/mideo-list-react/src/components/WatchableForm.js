@@ -37,11 +37,6 @@ function WatchableForm({ watchable }) {
     navigate('/watchlist');
   }
 
-  // async function handleAdd(data) {
-  //   navigate("/watchlist");
-  //   return Promise.resolve(data);
-  // }
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -82,46 +77,12 @@ function WatchableForm({ watchable }) {
       const data = await addWatchableToWatchlist(addedWatchable.id);
 
       Promise.resolve(data).then(() => handleAdd());
-      // .catch(
-      //   (errors) => {
-      //     if (errors) {
-      //       setErrors(errors);
-      //     }
-      //   }
-      // );
-      // data.response.json().then(() => navigate("/watchlist"));
     } catch (errors) {
       if (errors) {
         setErrors(errors);
       }
     }
   };
-
-
-  // handleSubmit().then(() => navigate('/watchlist'));
-
-  // handleSubmit()
-  //   .then(() => navigate('/watchlist'))
-  //   .catch((errors) => {
-  //     if (errors) {
-  //       setErrors(errors);
-  //     }
-  // });
-
-  //   try {
-  //   } catch (error) {
-  //     // setErrors();
-  //   }
-
-  //   const addedWatchable = await saveWatchable(watchableToAdd);
-  //   save(addedWatchable)
-  //       .then(() => navigate('/watchlist'))
-  //       .catch((errors) => {
-  //         if (errors) {
-  //           setErrors(errors);
-  //         }
-  //       });
-  // };
 
   const addWatchableToWatchlist = async (watchableId) => {
     // Replace `watchlistId` with the actual ID of the selected watchlist
@@ -150,10 +111,6 @@ function WatchableForm({ watchable }) {
       return Promise.reject();
     }
   };
-
-  // async function save(watchable) {
-  //   return addWatchableToWatchlist(watchable.id);
-  // }
 
   return (
     <div>

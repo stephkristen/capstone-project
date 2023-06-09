@@ -195,12 +195,12 @@ class WatchlistServiceTest {
 
     @Test
     void shouldNotAddDuplicateWatchable() {
-        // Arrange
         Watchlist movieList = new Watchlist("4", "Completed Movies", new ArrayList<>(), userId1);
         Watchable existingMovie = new Watchable();
         existingMovie.setId("5");
         existingMovie.setTitle("Inception");
         existingMovie.setType("movie");
+        existingMovie.setOverview("Existing Movie Overview");
 
         movieList.getWatchables().add(existingMovie);
 

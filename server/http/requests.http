@@ -336,3 +336,8 @@ Content-Type: application/json
   ],
   "_class": "learn.mideo.model.Watchable"
 }
+
+###
+
+POST http://localhost:8080/watchlist/647a0ae83301f15c1e7fca02 HTTP/1.1
+Content-Type: application/json
