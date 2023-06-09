@@ -33,6 +33,10 @@ function WatchableForm({ watchable }) {
     setSelectedRating(event.target.value);
   };
 
+  const handleAdd = () =>{
+    navigate('/watchlist');
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -70,88 +74,116 @@ function WatchableForm({ watchable }) {
 
     try {
       const addedWatchable = await saveWatchable(watchableToAdd);
-      await addWatchableToWatchlist(addedWatchable.id);
-      navigate("/watchlist");
-    } catch (error) {
+      const data = await addWatchableToWatchlist(addedWatchable.id);
+
+      Promise.resolve(data).then(() => handleAdd());
+    } catch (errors) {
+      if (errors) {
+        setErrors(errors);
+      }
     }
-    
   };
 
-   const addWatchableToWatchlist = async (watchableId) => {
-        const watchlist = await findByType(user.id, selectedList);
-        const watchlistId = watchlist.id;
-    
-        const init = {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("jwt")}`,
-          },
-        };
-    
-        const response = await fetch(
-          `http://localhost:8080/watchlist/${watchlistId}/addWatchable/${watchableId}`,
-          init
-        );
+  const addWatchableToWatchlist = async (watchableId) => {
+    // Replace `watchlistId` with the actual ID of the selected watchlist
+    const watchlist = await findByType(user.id, selectedList);
+    const watchlistId = watchlist.id;
 
-        if (!response.ok) {
-          return Promise.reject();
-        }
-      };
+    const init = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+      },
+    };
 
-      return (
-        <div id="watchlist-form" className="white-text rounded container p-3">
-          <div className="flex-container p-1">
-            <h2 className="m-1">Add To WatchList</h2>
-            <form onSubmit={handleSubmit}>
-              <div>
-                <label className="p-1 m-1" htmlFor="watchableType">
-                  Watchable List:
-                </label>
-                <select
-                  id="watchableType"
-                  className="p-1 m-2"
-                  value={selectedList}
-                  onChange={handleListChange}
-                  required
+    const response = await fetch(
+      `http://localhost:8080/watchlist/${watchlistId}/addWatchable/${watchableId}`,
+      init
+    );
+    if (response.ok) {
+      const data = await response.json();
+      return Promise.resolve(data).then(() => navigate('/watchlist'));
+    } else if (response.status === 400) {
+      const errs = await response.json();
+      return Promise.reject(errs);
+    } else {
+      return Promise.reject();
+    }
+  };
+
+  return (
+    <div>
+      <div id="watchlist-form" className="white-text rounded container p-3">
+        <div className="flex-container p-1">
+          <h2 className="m-1">Add To WatchList</h2>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label className="p-1 m-1" htmlFor="watchableType">
+                Watchable List:
+              </label>
+              <select
+                id="watchableType"
+                className="p-1 m-2"
+                value={selectedList}
+                onChange={handleListChange}
+                required
+              >
+                <option
+                  value="Completed Movies"
+                  selected={selectedList === "Completed Movies"}
                 >
-                  <option value="Completed Movies">Completed Movies</option>
-                  <option value="Completed Series">Completed Series</option>
-                  <option value="Plan to Watch">Plan to Watch</option>
-                </select>
+                  Completed Movies
+                </option>
+                <option
+                  value="Completed Series"
+                  selected={selectedList === "Completed Series"}
+                >
+                  Completed Series
+                </option>
+                <option
+                  value="Plan to Watch"
+                  selected={selectedList === "Plan to Watch"}
+                >
+                  Plan to Watch
+                </option>
+              </select>
+            </div>
+            <div>
+              <label className="p-1 m-1" htmlFor="watchableRating">
+                Rating:{" "}
+              </label>
+              <input
+                className="m-2"
+                type="number"
+                id="watchableRating"
+                min={1}
+                max={100}
+                step={1}
+                value={selectedRating}
+                onChange={handleRatingChange}
+              />
+            </div>
+            <div className="button-container p-2">
+              <div className="button-container-child">
+                <button className="btn btn-info" type="submit">
+                  Add
+                </button>
               </div>
-              <div>
-                <label className="p-1 m-1" htmlFor="watchableRating">
-                  Rating:
-                </label>
-                <input
-                  className="m-2"
-                  type="number"
-                  id="watchableRating"
-                  min={0}
-                  max={100}
-                  step={1}
-                  value={selectedRating}
-                  onChange={handleRatingChange}
-                />
+              <div className="button-container-child">
+                <button className="btn btn-secondary" onClick={handleCancel}>
+                  Cancel
+                </button>
               </div>
-              <div className="button-container p-2">
-                <div className="button-container-child">
-                  <button className="btn btn-info" type="submit">
-                    Add
-                  </button>
-                </div>
-                <div className="button-container-child">
-                  <button className="btn btn-secondary" onClick={handleCancel}>
-                    Cancel
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-          {errors.length > 0 && <FormErrors errors={errors} />}
+            </div>
+          </form>
         </div>
-      );
+      </div>
+      <div className="py-3">
+        {errors.length > 0 && <FormErrors errors={errors} />}
+      </div>
+    </div>
+  );
 }
 
 export default WatchableForm;
