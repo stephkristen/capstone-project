@@ -2,6 +2,8 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState, useContext, useEffect } from "react";
 import { authenticate } from "../services/auth";
 import AuthContext from "../contexts/AuthContext";
+import { generateWatchlists } from "../services/auth";
+import { findByUserId } from "../services/watchlist";
 
 const INITIAL_USER = {
   username: "",
@@ -23,12 +25,29 @@ function Login() {
   function handleSubmit(event) {
     event.preventDefault();
     authenticate(user)
-      .then((loggedInUser) => {
-        login(loggedInUser);
+    .then((loggedInUser) => {
+      login(loggedInUser);
+
+      if (!loggedInUser.watchlists || loggedInUser.watchlists.length === 0) {
+        findByUserId(loggedInUser.id) 
+          .then((foundWatchlists) => {
+            if (!foundWatchlists || foundWatchlists.length === 0) {
+              generateWatchlists(loggedInUser.id)
+                .then(() => {
+                  navigate("/");
+                })
+                .catch(() => setError(true));
+            } else {
+              navigate("/");
+            }
+          })
+          .catch(() => setError(true));
+      } else {
         navigate("/");
-      })
-      .catch(() => setError(true));
-  }
+      }
+    })
+    .catch(() => setError(true));
+}
 
   useEffect(() => {
     if (location.state?.user) {

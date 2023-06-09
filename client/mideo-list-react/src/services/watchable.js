@@ -30,8 +30,33 @@ async function addWatchable(watchable) {
   }
 }
 
+async function updateWatchable(watchableId, updatedWatchable) {
+  const init = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
+    body: JSON.stringify(updatedWatchable),
+  };
+
+  const response = await fetch(`${WATCHABLE_API_URL}/updatePersonalRating/${watchableId}`, init);
+  if (response.ok) {
+    const data = await response.json();
+    return Promise.resolve(data);
+  } else if (response.status === 400) {
+    const errs = await response.json();
+  } else {
+    return Promise.reject();
+  }
+}
+
 export async function saveWatchable(watchable) {
-  return addWatchable(watchable);
+  if (watchable.id) {
+    return updateWatchable(watchable.id, watchable);
+  } else {
+    return addWatchable(watchable);
+  }
 }
 
 export async function findWatchableById(watchableId) {
