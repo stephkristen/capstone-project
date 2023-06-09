@@ -76,14 +76,19 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 ### Built With
 
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
+* RapidAPI
+* React
+* Bootstrap
+* JQuery
+* Spring
+* MongoDB
+* JUnit
+* Java
+* HTML
+* CSS
+* JavaScript
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -186,9 +191,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Anthony Rocco-Frank - roccofrankanthony@gmail.com
-Stephanie Valdez - steph40997@gmail.com
-Tess Roseburrough - roseburrought@gmail.com
+* Anthony Rocco-Frank - roccofrankanthony@gmail.com
+* Stephanie Valdez - steph40997@gmail.com
+* Tess Roseburrough - roseburrought@gmail.com
 
 Project Link: [https://github.com/stephkristen/mideo-list](https://github.com/stephkristen/mideo-list)
 
