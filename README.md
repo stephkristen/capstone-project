@@ -79,7 +79,6 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 * RapidAPI
 * React
 * Bootstrap
-* JQuery
 * Spring
 * MongoDB
 * JUnit
